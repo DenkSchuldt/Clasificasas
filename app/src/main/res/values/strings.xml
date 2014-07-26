@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Clasificasas</string>
+    <string name="home_usuario">Usuario</string>
+    <string name="home_contrasena">Contraseña</string>
+    <string name="home_buscar">Buscar</string>
+    <string name="home_ingresar">Ingresar</string>
+    <string name="home_registrarme">Registrarme</string>
+    <string name="action_settings">Settings</string>
+
+</resources>
