@@ -12,25 +12,37 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/usuario_texto"
-        android:textSize="30dp"/>
+        android:textSize="30dp"
+        android:id="@+id/textView" />
 
-    <ImageView android:id="@+id/usuario_mapa"
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/map"
+        android:clickable="true"
+        android:layout_marginTop="50dp"
+        android:layout_height="300dp"
+        android:layout_width="match_parent"
+        android:name="com.google.android.gms.maps.SupportMapFragment"/>
+<!--
+    <com.google.android.gms.maps.MapView
+        android:layout_marginTop="50dp"
+        android:clickable="true"
+        android:id="@+id/mapview"
+        android:layout_height="300dp"
         android:layout_width="fill_parent"
-        android:layout_height="335dip"
-        android:src="@drawable/mapa"
-        android:layout_marginTop="45dip"
+        xmlns:android="http://schemas.android.com/apk/res/android"
     />
+-->
 
-    <Button android:id="@+id/usuario_publicar"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/usuario_publicar"
-        android:layout_marginTop="390dip"/>
+<Button android:id="@+id/usuario_publicar"
+android:layout_width="fill_parent"
+android:layout_height="wrap_content"
+android:text="@string/usuario_publicar"
+android:layout_marginTop="390dip"/>
 
-    <Button android:id="@+id/usuario_buscar"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/usuario_buscar"
-        android:layout_marginTop="440dip"/>
+<Button android:id="@+id/usuario_buscar"
+android:layout_width="fill_parent"
+android:layout_height="wrap_content"
+android:text="@string/usuario_buscar"
+android:layout_marginTop="440dip"/>
 
-</RelativeLayout>
+    </RelativeLayout>

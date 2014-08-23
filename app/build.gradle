@@ -1,15 +1,22 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        myandroidkey {
+            keyAlias 'app'
+            keyPassword 'changeit'
+            storeFile file('D:/Nueva carpeta - copia/Github/keystore/android.jks')
+            storePassword 'changeit'
+        }
+    }
     compileSdkVersion 19
-    buildToolsVersion "20.0.0"
-
+    buildToolsVersion '20.0.0'
     defaultConfig {
-        applicationId "com.ihm.clasificasas.clasificasas"
+        applicationId 'com.ihm.clasificasas.clasificasas'
         minSdkVersion 17
         targetSdkVersion 19
         versionCode 1
-        versionName "1.0"
+        versionName '1.0'
     }
     buildTypes {
         release {
@@ -17,8 +24,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    productFlavors {
+    }
 }
 
 dependencies {
+    compile 'com.google.android.gms:play-services:3.1.36'
     compile fileTree(dir: 'libs', include: ['*.jar'])
 }

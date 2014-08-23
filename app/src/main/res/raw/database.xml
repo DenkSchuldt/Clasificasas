@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <casas>
+        <casa>
+            <direccion>tuvalu_ulterior</direccion>
+        </casa>
+        <casa>
+            <direccion>rumania</direccion>
+        </casa>
+        <casa>
+            <direccion>argentina</direccion>
+        </casa>
+    </casas>
+</resources>
