@@ -2,13 +2,11 @@
 <resources>
 
     <string name="app_name">Clasificasas</string>
-
     <string name="home_usuario">Usuario</string>
     <string name="home_contrasena">Contraseña</string>
     <string name="home_buscar">Buscar</string>
     <string name="home_ingresar">Ingresar</string>
     <string name="home_registrarme">Registrarme</string>
-
     <string name="registrar_nombres">Nombres</string>
     <string name="registrar_apellidos">Apellidos</string>
     <string name="registrar_movil">Móvil</string>
@@ -17,13 +15,10 @@
     <string name="registrar_contrasena">Contraseña</string>
     <string name="registrar_confirmar">Confirmar contraseña</string>
     <string name="registrar">Registrar</string>
-
     <string name="usuario_texto">Usted está aquí:</string>
     <string name="usuario_publicar">Publicar</string>
     <string name="usuario_buscar">Buscar</string>
-
     <string name="buscar">Buscar Casa</string>
-
     <string name="buscar_in_ciudad">Ciudad</string>
     <string name="buscar_in_tipo_casa">Venta/Alquiler</string>
     <string name="buscar_in_texto">Presupuesto:</string>
@@ -31,7 +26,10 @@
     <string name="buscar_in_min">$0</string>
     <string name="buscar_in_max">$100.000</string>
     <string name="buscar_in_presupuesto">$50.000</string>
-
     <string name="action_settings">Salir</string>
+    <string name="title_activity_publicando">publicando</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_main">MainActivity</string>
 
 </resources>

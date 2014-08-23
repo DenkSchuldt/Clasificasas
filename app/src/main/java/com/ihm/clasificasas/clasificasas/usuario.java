@@ -93,8 +93,8 @@ public class usuario  extends FragmentActivity {
                 overridePendingTransition(R.animator.pushleftin, R.animator.pushleftout);
             break;
             case R.id.usuario_publicar:
-                Intent usuario = new Intent(usuario.this, buscar_in.class);
-                startActivity(usuario);
+                Intent publicar = new Intent(usuario.this, publicando.class);
+                startActivity(publicar);
                 overridePendingTransition(R.animator.pushleftin, R.animator.pushleftout);
             break;
         }
