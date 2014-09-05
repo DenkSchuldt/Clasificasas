@@ -1,0 +1,86 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".main$PlaceholderFragment">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="$200,000"
+            android:textSize="25dip"
+            android:layout_marginTop="10dip"
+            android:layout_marginLeft="10dip"/>
+        <ImageButton
+            android:layout_width="50dip"
+            android:layout_height="50dip"
+            android:layout_gravity="end"
+            android:layout_marginTop="-40dip"
+            android:src="@drawable/star"/>
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="170dip"
+            android:src="@drawable/house"
+            android:scaleType="fitXY"
+            android:layout_marginTop="2dip"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ubicación: Samanes 3"
+            android:textSize="22dip"
+            android:layout_marginTop="10dip"
+            android:layout_marginLeft="10dip"/>
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dip"
+            android:background="@android:color/darker_gray"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cuartos: 4"
+            android:textSize="22dip"
+            android:layout_marginTop="10dip"
+            android:layout_marginLeft="10dip"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Baños: 4"
+            android:textSize="22dip"
+            android:layout_marginTop="-26dip"
+            android:layout_marginLeft="180dip"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pisos: 2"
+            android:textSize="22dip"
+            android:layout_marginTop="2dip"
+            android:layout_marginLeft="10dip"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Descripción:"
+            android:textSize="20dip"
+            android:layout_marginTop="2dip"
+            android:layout_marginLeft="10dip"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lorem Ipsum es simplemente el textos de relleno las imprenta Lorem Ipsum es simplemente el textos de relleno las imprenta Lorem Ipsum es simplemente el textos de relleno las imprenta..."
+            android:textSize="20dip"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dip"/>
+        <Button android:id="@+id/resultado_mas_informacion"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Contactar"
+            android:layout_marginTop="5dip"/>
+    </LinearLayout>
+</RelativeLayout>

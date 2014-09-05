@@ -47,12 +47,12 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/home_ingresar"
-        android:layout_marginTop="300dip"/>
+        android:layout_marginTop="280dip"/>
 
     <View
         android:layout_width="fill_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="450dip"
+        android:layout_marginTop="460dip"
         android:background="@android:color/darker_gray"/>
 
     <Button android:id="@+id/home_registrar"
@@ -60,6 +60,5 @@
         android:background="@null"
         android:layout_height="wrap_content"
         android:text="@string/home_registrarme"
-        android:layout_marginTop="450dip"/>
-
+        android:layout_marginTop="465dip"/>
 </RelativeLayout>

@@ -17,7 +17,7 @@
         android:id="@+id/buscar_in_ciudad"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:prompt="@string/buscar_in_ciudad"
+        android:prompt="@string/buscar_ciudad"
         android:textSize="40dp"/>
 
     <TextView
@@ -30,14 +30,14 @@
         android:id="@+id/buscar_in_tipo_casa"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:prompt="@string/buscar_in_tipo_casa"
+        android:prompt="@string/buscar_tipo_casa"
         android:layout_marginTop="70dip"
         android:textSize="40dp"/>
 
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/buscar_in_texto"
+        android:text="@string/buscar_texto"
         android:layout_marginTop="140dip"
         android:textSize="30dp"/>
 
@@ -51,28 +51,30 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/buscar_in_min"
+        android:text="@string/buscar_min"
         android:layout_marginTop="230dip"/>
 
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/buscar_in_max"
+        android:text="@string/buscar_max"
         android:layout_marginLeft="260dip"
         android:layout_marginTop="230dip"/>
 
-    <TextView
+    <EditText
+        android:id="@+id/buscar_presupuesto"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/buscar_in_presupuesto"
-        android:layout_marginLeft="60dip"
+        android:text="@string/buscar_presupuesto"
+        android:gravity="center"
         android:layout_marginTop="300dip"
-        android:textSize="55dp"/>
+        android:textSize="55dp"
+        android:inputType="numberDecimal"/>
 
     <Button android:id="@+id/buscar_in_btn"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/buscar_in_buscar"
+        android:text="@string/buscar_buscar"
         android:layout_marginTop="440dip"/>
 
 </RelativeLayout>

@@ -5,7 +5,6 @@ android {
         myandroidkey {
             keyAlias 'app'
             keyPassword 'changeit'
-            storeFile file('D:/Nueva carpeta - copia/Github/keystore/android.jks')
             storePassword 'changeit'
         }
     }

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin">
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dip"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/publicar_txt"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/publicar_txt"
+                android:textSize="30dip"/>
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="255dip"
+                android:src="@drawable/location"
+                android:layout_marginTop="10dip"/>
+
+            <TextView
+                android:id="@+id/publicar_info"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/publicar_info"
+                android:layout_marginTop="10dip"
+                android:textSize="25dip"/>
+
+            <EditText
+                android:id="@+id/publicar_costo"
+                android:layout_width="160dip"
+                android:layout_height="45dip"
+                android:hint="@string/publicar_costo"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/publicar_cuartos"
+                android:layout_width="160dip"
+                android:layout_height="45dip"
+                android:hint="@string/publicar_cuartos"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/publicar_banos"
+                android:layout_width="160dip"
+                android:layout_height="45dip"
+                android:hint="@string/publicar_banos"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/publicar_pisos"
+                android:layout_width="160dip"
+                android:layout_height="45dip"
+                android:hint="@string/publicar_pisos"
+                android:inputType="number" />
+
+            <TextView
+                android:id="@+id/publicar_tipo"
+                android:layout_width="160dip"
+                android:layout_height="45dip"
+                android:layout_marginLeft="170dip"
+                android:layout_marginTop="-45dip"
+                android:textSize="20dip"/>
+            <Spinner
+                android:id="@+id/publicar_tipo_sp"
+                android:layout_width="160dip"
+                android:layout_height="45dip"
+                android:layout_marginLeft="170dip"
+                android:layout_marginTop="-45dip"
+                android:textSize="20dip"/>
+
+            <EditText
+                android:id="@+id/publicar_terreno"
+                android:layout_width="160dip"
+                android:layout_height="45dip"
+                android:hint="@string/publicar_terreno"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/publicar_construccion"
+                android:layout_width="160dip"
+                android:layout_height="45dip"
+                android:layout_marginTop="-45dip"
+                android:layout_marginLeft="170dip"
+                android:hint="@string/publicar_construccion"
+                android:inputType="number" />
+
+            <Button android:id="@+id/publicar_foto_btn"
+                android:layout_width="160dip"
+                android:layout_height="150dip"
+                android:layout_marginLeft="170dip"
+                android:layout_marginTop="-255dip"
+                android:text="@string/publicar_foto"/>
+
+            <Button android:id="@+id/publicar_btn"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/publicar"
+                android:layout_marginTop="110dip"/>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

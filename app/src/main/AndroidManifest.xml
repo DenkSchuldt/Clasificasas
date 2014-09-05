@@ -46,12 +46,10 @@
         <activity
             android:name=".usuario"
             android:label="@string/app_name"
-            android:theme="@android:style/Theme.NoTitleBar" >
-
-            <!-- android:theme="@android:style/Theme.Holo.Light.DarkActionBar" -->
+            android:theme="@android:style/Theme.Holo.Light.DarkActionBar">
         </activity>
         <activity
-            android:name=".buscar_in"
+            android:name=".buscar"
             android:label="@string/buscar"
             android:theme="@android:style/Theme.Holo.Light.DarkActionBar" >
             <meta-data
@@ -59,12 +57,20 @@
                 android:value="com.ihm.clasificasas.clasificasas.usuario" />
         </activity>
         <activity
-            android:name=".buscar_out"
-            android:label="@string/buscar"
+            android:name=".publicar"
+            android:label="@string/publicar"
             android:theme="@android:style/Theme.Holo.Light.DarkActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".main" />
+                android:value="com.ihm.clasificasas.clasificasas.publciar" />
+        </activity>
+        <activity
+            android:name=".resultados"
+            android:label="@string/resultados"
+            android:theme="@android:style/Theme.Holo.Light.DarkActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ihm.clasificasas.clasificasas.usuario" />
         </activity>
         <activity
             android:name=".publicando"

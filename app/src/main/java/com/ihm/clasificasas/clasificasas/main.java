@@ -31,7 +31,7 @@ public class main extends Activity {
         public void onClick(View v) {
         switch (v.getId()) {
             case R.id.home_buscar:
-                Intent buscar_out = new Intent(main.this, buscar_out.class);
+                Intent buscar_out = new Intent(main.this, buscar.class);
                 startActivity(buscar_out);
                 overridePendingTransition(R.animator.pushleftin, R.animator.pushleftout);
             break;
