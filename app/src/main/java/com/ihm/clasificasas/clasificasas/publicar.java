@@ -28,7 +28,7 @@ public class publicar extends Activity {
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        spinner_tipo = (Spinner)findViewById(R.id.publicar_tipo_sp);
+        /*spinner_tipo = (Spinner)findViewById(R.id.publicar_tipo_sp);
         ArrayAdapter<String> adapter4 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, tipo);
         spinner_tipo.setAdapter(adapter4);
         spinner_tipo.setOnItemSelectedListener(
@@ -43,7 +43,7 @@ public class publicar extends Activity {
                         // TODO Auto-generated method stub
                     }
                 }
-        );
+        );*/
     }
 
     @Override

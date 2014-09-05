@@ -27,15 +27,17 @@
     <string name="buscar_max">$100.000</string>
     <string name="buscar_presupuesto">50000</string>
 
-    <string name="publicar_txt">Elija una ubicación:</string>
+    <string name="publicar_ubicacion">Ubicación: Samanes 3</string>
     <string name="publicar_info">Información:</string>
-    <string name="publicar_foto">Agregar fotografía</string>
-    <string name="publicar_costo">Costo: $100.000</string>
+    <string name="publicar_foto">Agregar fotografías adicionales</string>
+    <string name="publicar_costo">Costo: 1000</string>
     <string name="publicar_cuartos">N° Cuartos</string>
     <string name="publicar_banos">N° Baños</string>
     <string name="publicar_pisos">N° Pisos</string>
-    <string name="publicar_terreno">Terreno: 100 m2</string>
-    <string name="publicar_construccion">Construc: 90.5 m2</string>
+    <string name="publicar_terreno">Terr: 100m 2</string>
+    <string name="publicar_construccion">Const: 90 m2</string>
+    <string name="publicar_tipo">Alquiler</string>
+    <string name="publicar_descripcion">Breve descripcion de la casa</string>
     <string name="publicar">Publicar Casa</string>
 
     <string name="resultados">Búsqueda</string>

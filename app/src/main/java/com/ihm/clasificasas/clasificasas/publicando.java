@@ -35,12 +35,6 @@ public class publicando extends FragmentActivity {
         super.onCreate(savedInstanceState);
         mImageView=(ImageView)findViewById(R.id.imageView);
         button=(Button)findViewById(R.id.button);
-        if (button==null)
-            Log.v("button", "es null marico coño");
-        else{
-            Log.v("button","no es null");
-        }
-
         setContentView(R.layout.activity_publicando);
         prepareImagePicker();
     }

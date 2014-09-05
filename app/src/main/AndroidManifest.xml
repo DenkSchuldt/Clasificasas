@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.send"/>
 
     <uses-feature
         android:glEsVersion="0x00020000"
@@ -23,7 +24,7 @@
         android:theme="@style/AppTheme" >
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyDGqxDIXJXW8KJrEz9ozuM7AHCYwzAdkss" />
+            android:value="AIzaSyDErOkPjgzsF8Ke_f1v1DyMBvEGLq6KEaU" />
 
         <uses-library android:name="com.google.android.maps" />
 

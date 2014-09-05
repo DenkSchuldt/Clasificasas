@@ -1,114 +1,115 @@
-<?xml version="1.0" encoding="utf-8"?>
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin">
-
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".main$PlaceholderFragment">
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="0dip"
+            android:layout_height="fill_parent"
             android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/publicar_txt"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/publicar_txt"
-                android:textSize="30dip"/>
-
-            <ImageView
-                android:layout_width="fill_parent"
-                android:layout_height="255dip"
-                android:src="@drawable/location"
-                android:layout_marginTop="10dip"/>
-
-            <TextView
-                android:id="@+id/publicar_info"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/publicar_info"
-                android:layout_marginTop="10dip"
-                android:textSize="25dip"/>
-
             <EditText
                 android:id="@+id/publicar_costo"
                 android:layout_width="160dip"
                 android:layout_height="45dip"
                 android:hint="@string/publicar_costo"
+                android:textSize="22dp"
                 android:inputType="number" />
-
+            <TextView
+                android:id="@+id/publicar_tipo_tv"
+                android:layout_width="160dip"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="-25dip"/>
+            <Spinner
+                android:id="@+id/publicar_tipo"
+                android:layout_width="160dip"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="-25dip"
+                android:prompt="@string/publicar_tipo"/>
+            <ImageButton
+                android:layout_width="fill_parent"
+                android:layout_height="150dip"
+                android:layout_gravity="center"
+                android:src="@drawable/houseblank"
+                android:scaleType="fitXY"/>
+            <EditText
+                android:id="@+id/publicar_ubicacion"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/publicar_ubicacion"
+                android:textSize="22dp"/>
+            <!--<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/map"
+                android:clickable="true"
+                android:layout_marginTop="10dp"
+                android:layout_height="120dp"
+                android:layout_width="match_parent"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                />-->
             <EditText
                 android:id="@+id/publicar_cuartos"
                 android:layout_width="160dip"
                 android:layout_height="45dip"
                 android:hint="@string/publicar_cuartos"
+                android:textSize="22dp"
                 android:inputType="number" />
-
             <EditText
                 android:id="@+id/publicar_banos"
                 android:layout_width="160dip"
                 android:layout_height="45dip"
                 android:hint="@string/publicar_banos"
-                android:inputType="number" />
-
+                android:textSize="22dp"
+                android:layout_marginTop="-45dip"
+                android:layout_marginLeft="180dip"/>
             <EditText
                 android:id="@+id/publicar_pisos"
                 android:layout_width="160dip"
                 android:layout_height="45dip"
                 android:hint="@string/publicar_pisos"
+                android:textSize="22dp"
                 android:inputType="number" />
-
-            <TextView
-                android:id="@+id/publicar_tipo"
+            <Button android:id="@+id/publicar_fotografias"
                 android:layout_width="160dip"
-                android:layout_height="45dip"
-                android:layout_marginLeft="170dip"
-                android:layout_marginTop="-45dip"
-                android:textSize="20dip"/>
-            <Spinner
-                android:id="@+id/publicar_tipo_sp"
-                android:layout_width="160dip"
-                android:layout_height="45dip"
-                android:layout_marginLeft="170dip"
-                android:layout_marginTop="-45dip"
-                android:textSize="20dip"/>
-
+                android:layout_height="135dip"
+                android:text="@string/publicar_foto"
+                android:layout_marginTop="-40dip"
+                android:layout_marginLeft="180dip"/>
             <EditText
                 android:id="@+id/publicar_terreno"
                 android:layout_width="160dip"
                 android:layout_height="45dip"
                 android:hint="@string/publicar_terreno"
-                android:inputType="number" />
-
+                android:textSize="22dp"
+                android:inputType="number"
+                android:layout_marginTop="-92dip"/>
             <EditText
                 android:id="@+id/publicar_construccion"
                 android:layout_width="160dip"
                 android:layout_height="45dip"
-                android:layout_marginTop="-45dip"
-                android:layout_marginLeft="170dip"
                 android:hint="@string/publicar_construccion"
+                android:textSize="22dp"
                 android:inputType="number" />
-
-            <Button android:id="@+id/publicar_foto_btn"
-                android:layout_width="160dip"
+            <EditText
+                android:id="@+id/publicar_descripcion"
+                android:layout_width="fill_parent"
                 android:layout_height="150dip"
-                android:layout_marginLeft="170dip"
-                android:layout_marginTop="-255dip"
-                android:text="@string/publicar_foto"/>
-
-            <Button android:id="@+id/publicar_btn"
+                android:hint="@string/publicar_descripcion"
+                android:textSize="20dp"
+                android:gravity="top"
+                android:layout_marginTop="10dip"/>
+            <Button android:id="@+id/publicar"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/publicar"
-                android:layout_marginTop="110dip"/>
+                android:layout_marginTop="5dip"/>
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>
