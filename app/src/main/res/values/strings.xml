@@ -25,7 +25,7 @@
     <string name="buscar_buscar">Buscar Casa</string>
     <string name="buscar_min">$0</string>
     <string name="buscar_max">$100.000</string>
-    <string name="buscar_presupuesto">50.000</string>
+    <string name="buscar_presupuesto">50000</string>
 
     <string name="publicar_txt">Elija una ubicación:</string>
     <string name="publicar_info">Información:</string>
@@ -42,6 +42,8 @@
     <string name="resultados_no">No se han encontrado resultados</string>
     <string name="resultados_venta">Venta</string>
     <string name="resultados_alquiler">Alquiler</string>
+
+    <string name="detalle">Más información</string>
 
     <string name="action_settings">Salir</string>
     <string name="title_activity_publicando">publicando</string>
