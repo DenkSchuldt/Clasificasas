@@ -35,6 +35,7 @@
                 android:layout_marginTop="-25dip"
                 android:prompt="@string/publicar_tipo"/>
             <ImageButton
+                android:id="@+id/subir_foto"
                 android:layout_width="fill_parent"
                 android:layout_height="150dip"
                 android:layout_gravity="center"
