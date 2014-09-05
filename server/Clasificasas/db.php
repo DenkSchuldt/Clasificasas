@@ -5,9 +5,6 @@
 		protected $db_user = 'root'; 
 		protected $db_pass = 'root'; 
 		protected $db_host = 'localhost'; 
-				 
-		// Open a connect to the database.  
-		// Make sure this is called on every page that needs to use the database. 
 		 
 		public function connect() { 
 		 
@@ -17,26 +14,41 @@
 				echo "Connection failed: %s\n", mysqli_connect_error(); 
 				exit(); 
 			} 
-			echo "success";
 			return $connect_db; 
-			 
 		} 
 		
 		public function login($connect_db,$username, $password ) { 
-         
-        $result = mysqli_query($connect_db,"SELECT * FROM usuario WHERE usuario = '$username' AND cont = '$password' "); 
-         
-        if ( mysqli_num_rows($result) == 1 ) { 
-			echo "usuario registrado";
-            /*$_SESSION[ "user" ] = serialize( new User( mysqli_fetch_assoc( $result ) ) ); 
-            $_SESSION[ 'login_time' ] = time(); 
-            $_SESSION[ 'logged_in' ] = 1; */
-            return true; 
-        } else { 
-			echo "usuario no registrado";
-            return false; 
-        } 
-    } 
+			 
+			$result = mysqli_query($connect_db,"SELECT * FROM usuario WHERE usuario = '$username' AND cont = '$password' "); 
+			 
+			if ( mysqli_num_rows($result) == 1 ) { 
+				return true; 
+			} else { 
+				return false; 
+			} 
+		}
+		
+		public function buscarporusuario($connect_db,$username) { 
+			 
+			$result = mysqli_query($connect_db,"SELECT * FROM usuario WHERE usuario = '$username' "); 
+			 
+			if ( mysqli_num_rows($result) == 1 ) { 
+				return true; 
+			} else { 
+				return false; 
+			} 
+		}
 
+		public function crearusuario($connect_db, $username, $password, $mobil, $nombres, $apellidos, $correo ) { 
+			 
+			$result = mysqli_query($connect_db,"INSERT INTO usuario (usuario,cont,mobil,nombres,apellidos,correo) VALUES ('$username','$password','$mobil','$nombres','$apellidos','$correo')"); 
+		 
+			if ($result) { 
+				return true; 
+			} else { 
+				//die('Error: ' . mysqli_error($connect_db));
+				return false; 
+			} 
+		}	
 	}
 ?>
