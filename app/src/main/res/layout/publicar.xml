@@ -26,21 +26,34 @@
                 android:layout_width="160dip"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:layout_marginTop="-25dip"/>
+                android:layout_marginTop="-25dip"
+                android:textSize="22dp"/>
             <Spinner
                 android:id="@+id/publicar_tipo"
                 android:layout_width="160dip"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:layout_marginTop="-25dip"
+                android:textSize="22dp"
                 android:prompt="@string/publicar_tipo"/>
             <ImageButton
-                android:id="@+id/subir_foto"
+                android:id="@+id/publicar_portada"
                 android:layout_width="fill_parent"
                 android:layout_height="150dip"
                 android:layout_gravity="center"
                 android:src="@drawable/houseblank"
                 android:scaleType="fitXY"/>
+            <TextView
+                android:id="@+id/publicar_ciudad_tv"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="22dp"/>
+            <Spinner
+                android:id="@+id/publicar_ciudad"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="22dp"
+                android:prompt="@string/publicar_tipo"/>
             <EditText
                 android:id="@+id/publicar_ubicacion"
                 android:layout_width="fill_parent"
