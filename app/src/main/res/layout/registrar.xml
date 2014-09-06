@@ -94,7 +94,7 @@
         android:hint="@string/registrar_contrasena"
         android:layout_marginTop="300dip"
         android:layout_marginLeft="60dip"
-        android:inputType="text" />
+        android:inputType="textPassword"/>
 
     <ImageView
         android:id="@+id/registrar_imageView7"
@@ -109,7 +109,7 @@
         android:hint="@string/registrar_confirmar"
         android:layout_marginTop="360dip"
         android:layout_marginLeft="60dip"
-        android:inputType="text" />
+        android:inputType="textPassword"/>
 
     <Button android:id="@+id/registrar_btn"
         android:layout_width="fill_parent"
