@@ -22,6 +22,7 @@
                 android:layout_marginTop="10dip"
                 android:layout_marginLeft="10dip"/>
             <ImageButton
+                android:id="@+id/detalle_upload_button"
                 android:layout_width="50dip"
                 android:layout_height="50dip"
                 android:layout_gravity="end"
@@ -34,6 +35,7 @@
                 android:scaleType="fitXY"
                 android:layout_marginTop="2dip"/>
             <ImageButton
+                android:id="@+id/detalle_more_photos"
                 android:layout_width="50dip"
                 android:layout_height="50dip"
                 android:layout_gravity="end"
@@ -120,7 +122,6 @@
                 android:textSize="22dip"
                 android:layout_marginTop="2dip"
                 android:layout_marginLeft="10dip"/>
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -136,20 +137,37 @@
                 android:textSize="22dip"
                 android:layout_marginTop="-30dip"
                 android:layout_marginLeft="75dip"/>
-            <ImageButton
-                android:id="@+id/detalle_phone_call"
-                android:layout_width="50dip"
-                android:layout_height="50dip"
-                android:layout_gravity="end"
-                android:layout_marginTop="-40dip"
-                android:src="@drawable/phone"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Correo: dschuldt@outlook.com"
+                android:text="Correo:"
                 android:textSize="22dip"
                 android:layout_marginTop="2dip"
                 android:layout_marginLeft="10dip"/>
+            <TextView
+                android:id="@+id/detalle_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="dschuldt@outlook.com"
+                android:textSize="22dip"
+                android:layout_marginTop="-30dip"
+                android:layout_marginLeft="90dip"/>
+            <ImageButton
+                android:id="@+id/detalle_phone_button"
+                android:layout_width="50dip"
+                android:layout_height="50dip"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dip"
+                android:layout_marginRight="30dip"
+                android:src="@drawable/phone"/>
+            <ImageButton
+                android:id="@+id/detalle_email_button"
+                android:layout_width="50dip"
+                android:layout_height="50dip"
+                android:layout_gravity="center"
+                android:layout_marginTop="-50dip"
+                android:layout_marginLeft="30dip"
+                android:src="@drawable/email"/>
             <Button android:id="@+id/detalle_mas_informacion"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
