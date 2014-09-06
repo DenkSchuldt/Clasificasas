@@ -54,20 +54,31 @@
                 android:layout_height="wrap_content"
                 android:textSize="22dp"
                 android:prompt="@string/publicar_tipo"/>
+
             <EditText
                 android:id="@+id/publicar_ubicacion"
-                android:layout_width="fill_parent"
+                android:layout_width="205dp"
                 android:layout_height="wrap_content"
-                android:hint="@string/publicar_ubicacion"
+                android:hint="Escribir ubicacion"
+                android:layout_toEndOf="@+id/textView4"
                 android:textSize="22dp"/>
-            <!--<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="84dp"
+                android:layout_height="36dp"
+                android:text="Buscar"
+                android:id="@+id/button"
+                android:layout_gravity="right" />
+
+            <fragment xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/map"
                 android:clickable="true"
                 android:layout_marginTop="10dp"
-                android:layout_height="120dp"
+                android:layout_height="216dp"
                 android:layout_width="match_parent"
                 android:name="com.google.android.gms.maps.SupportMapFragment"
-                />-->
+                />
             <EditText
                 android:id="@+id/publicar_cuartos"
                 android:layout_width="160dip"
