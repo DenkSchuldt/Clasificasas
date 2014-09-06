@@ -2,6 +2,8 @@ package com.ihm.clasificasas.clasificasas;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -65,7 +67,19 @@ public class registrar extends Activity {
         }
         }
     };
+    public  void  showAlertDialog(String title,String message)
+    {
 
+        final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle(title);
+        alertDialog.setMessage(message);
+        alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                alertDialog.dismiss();
+            }
+        });
+        alertDialog.show();
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -81,28 +95,23 @@ public class registrar extends Activity {
     }
 
     class RegistrarUsuario extends AsyncTask<String, String, String> {
+        String names;
+        String lastnames;
+        String mobile;
+        String email;
+        String user;
+        String password;
+        String confirm;
         @Override
         protected String doInBackground(String... params) {
-            String names = nombres.getText().toString();
-            String lastnames = apellidos.getText().toString();
-            String mobile = movil.getText().toString();
-            String email = correo.getText().toString();
-            String user = usuario.getText().toString();
-            String password = contrasena.getText().toString();
-            String confirm = confirmar.getText().toString();
-            Boolean validator = true;
-            if(!names.matches("^[a-zA-Z\\s]+")){ validator = false; Log.e("Nombre", names);}
-            if(!lastnames.matches("^[a-zA-Z\\s]+")){ validator = false; Log.e("Apellido",lastnames);}
-            if(!mobile.matches("[0-9]+") || mobile.length()!=10) { validator = false; Log.e("Mobile",mobile);}
-            String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
-            java.util.regex.Pattern pttrn = java.util.regex.Pattern.compile(ePattern);
-            java.util.regex.Matcher m = pttrn.matcher(email);
-            if(!m.matches()) {validator = false; Log.e("Email",email);}
-            if(user.isEmpty()) { validator = false; Log.e("User",user);}
-            if(password.isEmpty()) { validator = false; Log.e("Passwd",password);}
-            if(confirm.isEmpty()) { validator = false; Log.e("Confirm",confirm);}
-            if(!password.equals(confirm)) { validator = false; Log.e("Equal","Err");}
-            if(validator){
+            names = nombres.getText().toString();
+            lastnames = apellidos.getText().toString();
+            mobile = movil.getText().toString();
+            email = correo.getText().toString();
+            user = usuario.getText().toString();
+            password = contrasena.getText().toString();
+            confirm = confirmar.getText().toString();
+            if(validar()){
                 List<NameValuePair> p = new ArrayList<NameValuePair>();
                 p.add(new BasicNameValuePair("usuario", user));
                 MessageDigest md = null;
@@ -141,6 +150,84 @@ public class registrar extends Activity {
                 }
             }
             return null;
+        }
+        public boolean validar(){
+            if(!names.matches("^[a-zA-Z\\s]+")){
+                runOnUiThread(new Runnable(){
+                    public void run(){
+                        showAlertDialog("Error de registro",
+                                "Los nombres solo puede contener letras de a-z minúsculas o mayúsculas");
+                    }
+                });
+                return false;
+            }
+            if(!lastnames.matches("^[a-zA-Z\\s]+")){
+                runOnUiThread(new Runnable(){
+                    public void run(){
+                        showAlertDialog("Error de registro",
+                                "El apellido solo puede contener letras de a-z minúsculas o mayúsculas");
+                    }
+                });
+            return false;
+            }
+            if(!mobile.matches("[0-9]+") || mobile.length()!=10) {
+                runOnUiThread(new Runnable(){
+                    public void run(){
+                        showAlertDialog("Error de registro",
+                                "El numero de telefono debe de contener 10 números y solamente números");
+                    }
+                });
+                return false;
+            }
+            String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
+            java.util.regex.Pattern pttrn = java.util.regex.Pattern.compile(ePattern);
+            java.util.regex.Matcher m = pttrn.matcher(email);
+            if(!m.matches()) {//email
+                runOnUiThread(new Runnable(){
+                    public void run(){
+                        showAlertDialog("Error de registro",
+                                "La dirección de email es inválida");
+                    }
+                });
+                return false;
+            }
+            if(user.isEmpty()) {
+                runOnUiThread(new Runnable(){
+                    public void run(){
+                        showAlertDialog("Error de registro",
+                                "El usuario esta vacío");
+                    }
+                });
+                return false;
+            }
+            if(password.isEmpty()) {
+                runOnUiThread(new Runnable(){
+                    public void run(){
+                        showAlertDialog("Error de registro",
+                                "La contraseña esta vacía");
+                    }
+                });
+                return false;
+            }
+            if(confirm.isEmpty()) {
+                runOnUiThread(new Runnable(){
+                    public void run(){
+                        showAlertDialog("Error de registro",
+                                "El campo de confirmación de la contraseña esta vacía");
+                    }
+                });
+                return false;
+            }
+            if(!password.equals(confirm)) {
+                runOnUiThread(new Runnable(){
+                    public void run(){
+                        showAlertDialog("Error de registro",
+                                "Las contraseñas no coinciden");
+                    }
+                });
+                return false;
+            }
+            return true;
         }
     }
 }

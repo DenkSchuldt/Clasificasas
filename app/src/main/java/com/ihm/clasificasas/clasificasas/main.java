@@ -1,9 +1,14 @@
 package com.ihm.clasificasas.clasificasas;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Looper;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
@@ -58,6 +63,7 @@ public class main extends Activity {
                 overridePendingTransition(R.animator.pushleftin, R.animator.pushleftout);
             break;
             case R.id.home_ingresar:
+
                 new LoginUsuario().execute();
             break;
             case R.id.home_registrar:
@@ -68,7 +74,26 @@ public class main extends Activity {
         }
         }
     };
+    public Dialog createDialog(String title,String s) {
+        //using the builder class
+        AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+        builder.setTitle(title);
+        builder.setMessage(s);
+        return builder.create();
+    }
+    public  void  showAlertDialog(String title,String message)
+    {
 
+        final AlertDialog  alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle(title);
+        alertDialog.setMessage(message);
+        alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                alertDialog.dismiss();
+            }
+        });
+        alertDialog.show();
+    }
     /**
      * Background Async Task to Create new product
      * */
@@ -100,6 +125,12 @@ public class main extends Activity {
                     overridePendingTransition(R.animator.shrinka, R.animator.shrinkb);
                     finish();
                 } else {
+                    runOnUiThread(new Runnable(){
+                        public void run(){
+                            showAlertDialog("Error de autenticacion",
+                                  "La contraseña es incorrecta o usted ha escrito un usuario invalido");
+                        }
+                    });
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
