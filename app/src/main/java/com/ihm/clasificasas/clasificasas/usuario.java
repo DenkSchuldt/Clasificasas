@@ -157,19 +157,27 @@ public class usuario  extends FragmentActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.main, menu);
+        try {
+            menu.findItem(R.id.usuario).setTitle(getIntent().getExtras().getString("TAG_USUARIO"));
+        }catch (Exception e){}
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            Intent main = new Intent(usuario.this, main.class);
-            startActivity(main);
-            overridePendingTransition(R.animator.shrinka, R.animator.shrinkb);
-            finish();
-            return true;
+        switch (item.getItemId()){
+            case R.id.usuario:
+                break;
+            case R.id.configuracion:
+                break;
+            case R.id.salir:
+                Intent main = new Intent(usuario.this, main.class);
+                startActivity(main);
+                overridePendingTransition(R.animator.shrinka, R.animator.shrinkb);
+                finish();
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

@@ -1,8 +1,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.ihm.clasificasas.clasificasas.MainActivity" >
-    <item android:id="@+id/action_settings"
-        android:title="@string/action_settings"
+    <item android:id="@+id/usuario"
+        android:title="@string/usuario"
+        android:orderInCategory="100"
+        android:showAsAction="never" />
+    <item android:id="@+id/configuracion"
+        android:title="@string/configuracion"
+        android:orderInCategory="100"
+        android:showAsAction="never" />
+    <item android:id="@+id/salir"
+        android:title="@string/salir"
         android:orderInCategory="100"
         android:showAsAction="never" />
 </menu>
