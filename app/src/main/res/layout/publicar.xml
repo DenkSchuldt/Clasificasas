@@ -26,14 +26,14 @@
                 android:layout_width="160dip"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:layout_marginTop="-25dip"
+                android:layout_marginTop="-33dip"
                 android:textSize="22dp"/>
             <Spinner
                 android:id="@+id/publicar_tipo"
                 android:layout_width="160dip"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:layout_marginTop="-25dip"
+                android:layout_marginTop="-33dip"
                 android:textSize="22dp"
                 android:prompt="@string/publicar_tipo"/>
             <ImageButton
@@ -47,11 +47,13 @@
                 android:id="@+id/publicar_ciudad_tv"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="-10dip"
                 android:textSize="22dp"/>
             <Spinner
                 android:id="@+id/publicar_ciudad"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="-10dip"
                 android:textSize="22dp"
                 android:prompt="@string/publicar_tipo"/>
 
@@ -64,11 +66,12 @@
                 android:textSize="22dp"/>
 
             <Button
+                android:id="@+id/button"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="84dp"
                 android:layout_height="36dp"
                 android:text="Buscar"
-                android:id="@+id/button"
+                android:layout_marginTop="-35dip"
                 android:layout_gravity="right" />
 
             <fragment xmlns:android="http://schemas.android.com/apk/res/android"
@@ -101,20 +104,15 @@
                 android:hint="@string/publicar_pisos"
                 android:textSize="22dp"
                 android:inputType="number" />
-            <Button android:id="@+id/publicar_fotografias"
-                android:layout_width="160dip"
-                android:layout_height="135dip"
-                android:text="@string/publicar_foto"
-                android:layout_marginTop="-40dip"
-                android:layout_marginLeft="180dip"/>
             <EditText
                 android:id="@+id/publicar_terreno"
                 android:layout_width="160dip"
                 android:layout_height="45dip"
                 android:hint="@string/publicar_terreno"
                 android:textSize="22dp"
-                android:inputType="number"
-                android:layout_marginTop="-92dip"/>
+                android:layout_marginTop="-45dip"
+                android:layout_marginLeft="180dip"
+                android:inputType="number"/>
             <EditText
                 android:id="@+id/publicar_construccion"
                 android:layout_width="160dip"

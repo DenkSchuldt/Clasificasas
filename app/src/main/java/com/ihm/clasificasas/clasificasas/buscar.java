@@ -28,13 +28,17 @@ public class buscar extends Activity {
     Spinner spinner_ciudad;
     Spinner spinner_tipo;
     String[] ciudades = {
-            "Guayaquil",
-            "Quito",
-            "Cuenca",
-            "Babahoyo",
-            "Quevedo",
             "Ambato",
-            "Ibarra"
+            "Babahoyo",
+            "Cuenca",
+            "Esmeraldas",
+            "Guayaquil",
+            "Ibarra",
+            "Manabí",
+            "Portoviejo",
+            "Quevedo",
+            "Quito",
+            "Salinas"
     };
     String[] tipo = {
             "Venta",
@@ -73,34 +77,34 @@ public class buscar extends Activity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, ciudades);
         spinner_ciudad.setAdapter(adapter);
         spinner_ciudad.setOnItemSelectedListener(
-                new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> arg0, View arg1,int arg2, long arg3) {
-                        //int position = spinner_ciudad.getSelectedItemPosition();
-                        //Toast.makeText(getApplicationContext(), "You have selected " + ciudades[+position], Toast.LENGTH_LONG).show();
-                    }
-                    @Override
-                    public void onNothingSelected(AdapterView<?> arg0) {
-                        // TODO Auto-generated method stub
-                    }
+            new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> arg0, View arg1,int arg2, long arg3) {
+                    //int position = spinner_ciudad.getSelectedItemPosition();
+                    //Toast.makeText(getApplicationContext(), "You have selected " + ciudades[+position], Toast.LENGTH_LONG).show();
                 }
+                @Override
+                public void onNothingSelected(AdapterView<?> arg0) {
+                    // TODO Auto-generated method stub
+                }
+            }
         );
 
         spinner_tipo = (Spinner)findViewById(R.id.buscar_in_tipo_casa);
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, tipo);
         spinner_tipo.setAdapter(adapter2);
         spinner_tipo.setOnItemSelectedListener(
-                new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> arg0, View arg1,int arg2, long arg3) {
-                        //int position = spinner_tipo.getSelectedItemPosition();
-                        //Toast.makeText(getApplicationContext(), "You have selected " + tipo[+position], Toast.LENGTH_LONG).show();
-                    }
-                    @Override
-                    public void onNothingSelected(AdapterView<?> arg0) {
-                        // TODO Auto-generated method stub
-                    }
+            new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> arg0, View arg1,int arg2, long arg3) {
+                    //int position = spinner_tipo.getSelectedItemPosition();
+                    //Toast.makeText(getApplicationContext(), "You have selected " + tipo[+position], Toast.LENGTH_LONG).show();
                 }
+                @Override
+                public void onNothingSelected(AdapterView<?> arg0) {
+                    // TODO Auto-generated method stub
+                }
+            }
         );
 
         presupuesto = (TextView) findViewById(R.id.buscar_presupuesto);
@@ -124,6 +128,7 @@ public class buscar extends Activity {
         switch (v.getId()) {
             case R.id.buscar_in_btn:
                 Intent resultados = new Intent(com.ihm.clasificasas.clasificasas.buscar.this, resultados.class);
+                resultados.putExtra("TAG_USUARIO",getIntent().getExtras().getString("TAG_USUARIO"));
                 startActivity(resultados);
                 overridePendingTransition(R.animator.pushleftin, R.animator.pushleftout);
                 break;
@@ -136,6 +141,7 @@ public class buscar extends Activity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 Intent intent = new Intent(com.ihm.clasificasas.clasificasas.buscar.this, usuario.class);
+                intent.putExtra("TAG_USUARIO",getIntent().getExtras().getString("TAG_USUARIO"));
                 startActivity(intent);
                 overridePendingTransition(animator.pushrightin, animator.pushrightout);
                 finish();

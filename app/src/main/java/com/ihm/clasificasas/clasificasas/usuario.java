@@ -84,11 +84,13 @@ public class usuario  extends FragmentActivity {
         switch (v.getId()) {
             case R.id.usuario_buscar:
                 Intent buscar = new Intent(usuario.this, com.ihm.clasificasas.clasificasas.buscar.class);
+                buscar.putExtra("TAG_USUARIO",getIntent().getExtras().getString("TAG_USUARIO"));
                 startActivity(buscar);
                 overridePendingTransition(R.animator.pushleftin, R.animator.pushleftout);
-            break;
+                break;
             case R.id.usuario_publicar:
                 Intent publicar = new Intent(usuario.this, publicar.class);
+                publicar.putExtra("TAG_USUARIO",getIntent().getExtras().getString("TAG_USUARIO"));
                 startActivity(publicar);
                 overridePendingTransition(R.animator.pushleftin, R.animator.pushleftout);
             break;
