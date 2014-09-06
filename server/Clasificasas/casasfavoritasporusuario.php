@@ -3,35 +3,35 @@
 	$response = array();
 	
 	//si se envio o no los parametros
-	if (isset($_POST['usuario']) && isset($_POST['cont'])){
+	if (isset($_POST['usuario'])){
 		$usuario = $_POST['usuario'];
-		$cont = $_POST['cont'];
 		
-		/*connection*/
 		require_once ("db.php");
 		$obj=new DB();
 		$connect_db = $obj->connect();
 	
-		//result
-		$result = $obj->login($connect_db,$usuario,$cont);
+		$result = $obj->casasfavoritasporusuario ($connect_db,$usuario);
 		
-		//si existe el usuario o no
+		while ($row = mysqli_fetch_array($result)) { 
+            $casasfavoritas[] = $row; 
+        } 
+		
 		if($result){
 			$response["success"]=1;
-			$response["usuario"]=$usuario;
-			$response["message"]= "usuario registrado";
+			$response["casasfavoritas"]=$casasfavoritas;
+			$response["message"]= "casas encontradas";
 			echo json_encode($response);
 		}
 		else{
 			$response["success"]=0;
-			$response["usuario"]="";
-			$response["message"]= "ups, usuario no registrado";
+			$response["casafavoritas"]="";
+			$response["message"]= "ups, no hay ninguna casa con esas caracteristicas";
 			echo json_encode($response);
 		}
 	}
 	else{
 		$response["success"]=0;
-		$response["usuario"]="";
+		$response["casafavoritas"]="";
 		$response["message"]= "ups, falta algun campo";
 		echo json_encode($response);
 	}
