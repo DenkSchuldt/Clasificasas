@@ -22,7 +22,7 @@
 			$result = $obj->crearusuario($connect_db, $usuario, $cont, $mobil, $nombres, $apellidos, $correo );
 			
 			//si existe el usuario o no
-			if($result){
+			if($result==""){
 				$response["success"]=1;
 				$response["usuario"]=$usuario;
 				$response["message"]= "usuario creado";
@@ -31,7 +31,7 @@
 			else{
 				$response["success"]=0;
 				$response["usuario"]="";
-				$response["message"]= "ups, usuario no creado";
+				$response["message"]= $result;
 				echo json_encode($response);
 			}
 		}
