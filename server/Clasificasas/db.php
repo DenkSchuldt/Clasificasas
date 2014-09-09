@@ -123,5 +123,46 @@
 			} 
 		}
 		
+		public function editarperfil($connect_db,$usuario, $cont, $mobil, $nombres, $apellidos,$correo){
+			$result = mysqli_query($connect_db, "UPDATE usuario 
+												SET cont = '$cont', mobil = '$mobil', nombres ='$nombres', apellidos = '$apellidos', correo = '$correo'
+												WHERE usuario = '$usuario'");
+			if($result){
+				return true;
+			}
+			else 
+				return false;
+		}
+		
+		public function obtenerdatosdeusuario($connect_db,$username, $password ) { 
+			 
+			$result = mysqli_query($connect_db,"SELECT * FROM usuario WHERE usuario = '$username' AND cont = '$password' "); 
+			
+			if ( mysqli_num_rows($result) == 1 ) { 
+				return $result; 
+			} else { 
+				return ""; 
+			} 
+		}
+		
+		public function obtenercasaspublicadasporsuario($connect_db,$usuario){
+			$result = mysqli_query($connect_db,"SELECT idcasapublicada, direccion, costo FROM casapublicada, usuario WHERE usuario = '$usuario'"); 
+			
+			if ( mysqli_num_rows($result) >= 1 ) { 
+				return $result; 
+			} else { 
+				return ""; 
+			} 
+		}
+		
+		public function obtenerdatosdecasa($connect_db,$idcasapublicada){
+			$result = mysqli_query($connect_db,"SELECT * FROM casapublicada WHERE idcasapublicada = '$idcasapublicada'"); 
+			
+			if ( mysqli_num_rows($result) >= 1 ) { 
+				return $result; 
+			} else { 
+				return ""; 
+			} 
+		}
 	}
 ?>

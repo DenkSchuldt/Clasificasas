@@ -51,6 +51,21 @@
 		<input type="submit">
 	</form>
 	
+	<html>
+		<h1>Subir foto</h1>
+
+		<form action="upload_file.php" method="post"
+		enctype="multipart/form-data">
+		<label for="file">Filename:</label>
+		<input type="file" name="uploaded_file" id="uploaded_file"><br>
+		<input type="submit" name="submit" value="Submit">
+		</form>
+
+	<h1>Buscar casa</h1>
+	<form action="casaspublicadasporusuario.php" method="post">
+		usuario: <input type="text" name="usuario"><br>
+		<input type="submit">
+	</form>
 	
 	</body>
 </html>
