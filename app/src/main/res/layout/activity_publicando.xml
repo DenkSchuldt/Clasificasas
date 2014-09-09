@@ -145,8 +145,8 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:id="@+id/imageView"
-        android:layout_below="@+id/button"
-        android:layout_alignLeft="@+id/button"/>
+        android:layout_below="@+id/home_buscar"
+        android:layout_alignLeft="@+id/home_buscar"/>
 
     <Button
         android:layout_width="fill_parent"
@@ -155,7 +155,7 @@
         android:textSize="23dp"
         android:layout_marginTop="230dp"
         android:layout_marginLeft="250dp"
-        android:id="@+id/button" />
+        android:id="@+id/home_buscar" />
 
 
 </RelativeLayout>

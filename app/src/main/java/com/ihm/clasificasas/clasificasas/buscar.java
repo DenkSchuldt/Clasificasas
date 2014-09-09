@@ -109,8 +109,8 @@ public class buscar extends Activity {
             public void onStartTrackingTouch(SeekBar seekBar) {}
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
-                double resta = Integer.parseInt(max) - Integer.parseInt(min);
-                double calculo = Integer.parseInt(min) + ((double)progress/100.0)*resta;
+                int resta = Integer.parseInt(max) - Integer.parseInt(min);
+                int calculo = Integer.parseInt(min) + ((int)(progress/100.0)*resta);
 
                 presupuesto.setText(String.valueOf(calculo));
             }
@@ -191,7 +191,7 @@ public class buscar extends Activity {
                 txtmin.setText("$"+min);
                 txtmax = (TextView) findViewById(id.buscar_max_value);
                 txtmax.setText("$" + max);
-                presupuesto.setText("$"+((Double.parseDouble(min)+Double.parseDouble(max))/2));
+                presupuesto.setText("$"+((Integer.parseInt(min)+Integer.parseInt(max))/2));
             }catch (Exception e){}
         }
     }
