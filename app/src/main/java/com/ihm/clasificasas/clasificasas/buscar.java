@@ -3,6 +3,7 @@ package com.ihm.clasificasas.clasificasas;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,6 +15,15 @@ import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.ihm.clasificasas.clasificasas.R.*;
 
 /**
@@ -21,6 +31,11 @@ import static com.ihm.clasificasas.clasificasas.R.*;
  */
 public class buscar extends Activity {
 
+
+    JSONParser jsonParser = new JSONParser();
+    String url_datos = "http://"+IP.address+"/clasificasas/obtenermaxymin.php";
+    String max, min;
+    TextView txtmin, txtmax;
     SeekBar seekBar;
     TextView presupuesto;
     Button buscar, avanzada;
@@ -44,6 +59,7 @@ public class buscar extends Activity {
             "Venta",
             "Alquiler"
     };
+    String ciu, voa, costo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +67,7 @@ public class buscar extends Activity {
         setContentView(layout.buscar);
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-
+        new buscarCasa().execute();
         buscar = (Button) findViewById(R.id.buscar_in_btn);
         buscar.setOnClickListener(buscarInButtonhandler);
 
@@ -93,7 +109,10 @@ public class buscar extends Activity {
             public void onStartTrackingTouch(SeekBar seekBar) {}
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
-                presupuesto.setText(String.valueOf(progress * 1000));
+                double resta = Integer.parseInt(max) - Integer.parseInt(min);
+                double calculo = Integer.parseInt(min) + ((double)progress/100.0)*resta;
+
+                presupuesto.setText(String.valueOf(calculo));
             }
         });
     }
@@ -103,8 +122,15 @@ public class buscar extends Activity {
         switch (v.getId()) {
             case R.id.buscar_in_btn:
                 Intent resultados = new Intent(com.ihm.clasificasas.clasificasas.buscar.this, resultados.class);
-                if(getIntent().hasExtra("TAG_USUARIO"))
-                    resultados.putExtra("TAG_USUARIO",getIntent().getExtras().getString("TAG_USUARIO"));
+                ciu = spinner_ciudad.getSelectedItem().toString();
+                voa = spinner_tipo.getSelectedItem().toString();
+                costo = presupuesto.getText().toString().replace("$","");
+                if(getIntent().hasExtra("TAG_USUARIO")) {
+                    resultados.putExtra("TAG_USUARIO", getIntent().getExtras().getString("TAG_USUARIO"));
+                    resultados.putExtra("ciudad",ciu);
+                    resultados.putExtra("voa",voa);
+                    resultados.putExtra("costo",costo);
+                }
                 startActivity(resultados);
                 overridePendingTransition(R.animator.pushleftin, R.animator.pushleftout);
                 break;
@@ -132,4 +158,42 @@ public class buscar extends Activity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    class buscarCasa extends AsyncTask<String, Void, JSONArray> {
+        JSONArray maxymin;
+        @Override
+        protected JSONArray doInBackground(String... params) {
+            List<NameValuePair> p = new ArrayList<NameValuePair>();
+            p.add(new BasicNameValuePair("usuario",getIntent().getExtras().getString("TAG_USUARIO")));
+            JSONObject json = jsonParser.makeHttpRequest(url_datos,"POST", p);
+            try {
+                int success = json.getInt("success");
+                if (success == 1) {
+                    maxymin = json.getJSONArray("maxymin");
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return maxymin;
+        }
+
+        @Override
+        protected void onPostExecute(JSONArray maxymin) {
+            try {
+                for (int i = 0; i < maxymin.length(); i++) {
+                    JSONObject json_data = maxymin.getJSONObject(i);
+                    max = json_data.getString("max");
+                    min = json_data.getString("min");
+                }
+                txtmin = (TextView) findViewById(id.buscar_min_value);
+                txtmin.setText("$"+min);
+                txtmax = (TextView) findViewById(id.buscar_max_value);
+                txtmax.setText("$" + max);
+                presupuesto.setText("$"+((Double.parseDouble(min)+Double.parseDouble(max))/2));
+            }catch (Exception e){}
+        }
+    }
 }
+
