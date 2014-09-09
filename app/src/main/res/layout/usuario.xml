@@ -119,53 +119,12 @@
                 android:layout_marginTop="30dip"
                 android:textSize="23sp"
                 android:textColor="#fff"/>
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/publicada1"
+            <LinearLayout
+                android:id="@+id/usuario_publicaciones"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dip"
-                android:background="#fff"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="200dip"
-                    android:layout_height="wrap_content"
-                    android:text="Samanes 3.."
-                    android:paddingTop="5dip"
-                    android:paddingBottom="5dip"
-                    android:textSize="20sp"/>
-                <TextView
-                    android:layout_width="120dip"
-                    android:layout_height="wrap_content"
-                    android:text="$1000"
-                    android:paddingTop="5dip"
-                    android:paddingBottom="5dip"
-                    android:gravity="end"
-                    android:textSize="20sp"/>
+                android:orientation="vertical">
             </LinearLayout>
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/publicada2"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dip"
-                android:background="#fff"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="200dip"
-                    android:layout_height="wrap_content"
-                    android:text="Samanes 3.."
-                    android:paddingTop="5dip"
-                    android:paddingBottom="5dip"
-                    android:textSize="20sp"/>
-                <TextView
-                    android:layout_width="120dip"
-                    android:layout_height="wrap_content"
-                    android:text="$1000"
-                    android:paddingTop="5dip"
-                    android:paddingBottom="5dip"
-                    android:gravity="end"
-                    android:textSize="20sp"/>
-            </LinearLayout>
-
 
             <TextView
                 android:id="@+id/usuario_favoritas_label"
@@ -175,52 +134,13 @@
                 android:layout_marginTop="30dip"
                 android:textSize="23sp"
                 android:textColor="#fff"/>
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/favorita1"
+            <LinearLayout
+                android:id="@+id/usuario_favoritas"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dip"
-                android:background="#fff"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="200dip"
-                    android:layout_height="wrap_content"
-                    android:text="Samanes 3.."
-                    android:paddingTop="5dip"
-                    android:paddingBottom="5dip"
-                    android:textSize="20sp"/>
-                <TextView
-                    android:layout_width="120dip"
-                    android:layout_height="wrap_content"
-                    android:text="$1000"
-                    android:paddingTop="5dip"
-                    android:paddingBottom="5dip"
-                    android:gravity="end"
-                    android:textSize="20sp"/>
+                android:orientation="vertical">
             </LinearLayout>
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/favorita2"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dip"
-                android:background="#fff"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="200dip"
-                    android:layout_height="wrap_content"
-                    android:text="Samanes 3.."
-                    android:paddingTop="5dip"
-                    android:paddingBottom="5dip"
-                    android:textSize="20sp"/>
-                <TextView
-                    android:layout_width="120dip"
-                    android:layout_height="wrap_content"
-                    android:text="$1000"
-                    android:paddingTop="5dip"
-                    android:paddingBottom="5dip"
-                    android:gravity="end"
-                    android:textSize="20sp"/>
-            </LinearLayout>
+
             <Button android:id="@+id/usuario_publicar"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"

@@ -110,8 +110,9 @@ public class detalle extends Activity {
         }
     };
 
+
     class obtenerCasa extends AsyncTask<String, Void, JSONArray> {
-        String id=getIntent().getExtras().getString("idcasa");
+        String id="1";
         JSONArray casa;
 
         @Override

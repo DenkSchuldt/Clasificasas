@@ -56,17 +56,21 @@ public class main extends Activity {
 
     View.OnClickListener homeButtonhandler = new View.OnClickListener() {
         public void onClick(View v) {
-        switch (v.getId()) {
-
-            case R.id.home_ingresar:
-                new LoginUsuario().execute();
-            break;
-            case R.id.home_registrar:
-                Intent registrar = new Intent(main.this, registrar.class);
-                startActivity(registrar);
-                overridePendingTransition(R.animator.pushleftin, R.animator.pushleftout);
-            break;
-        }
+            switch (v.getId()) {
+                case R.id.home_buscar:
+                    Intent buscar = new Intent(main.this, buscar.class);
+                    startActivity(buscar);
+                    overridePendingTransition(R.animator.pushleftin, R.animator.pushleftout);
+                    break;
+                case R.id.home_ingresar:
+                    new LoginUsuario().execute();
+                    break;
+                case R.id.home_registrar:
+                    Intent registrar = new Intent(main.this, registrar.class);
+                    startActivity(registrar);
+                    overridePendingTransition(R.animator.pushleftin, R.animator.pushleftout);
+                    break;
+            }
         }
     };
 

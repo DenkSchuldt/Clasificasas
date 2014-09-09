@@ -1,5 +1,6 @@
 package com.ihm.clasificasas.clasificasas;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -8,6 +9,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.method.PasswordTransformationMethod;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,7 +40,9 @@ public class editar extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.home);
+        setContentView(R.layout.editar);
+        ActionBar actionBar = getActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         editar = (Button) findViewById(R.id.usuario_editar_informacion);
         editar.setOnClickListener(editarButtonhandler);
@@ -59,6 +63,21 @@ public class editar extends Activity {
         }
         }
     };
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent intent = new Intent(editar.this, usuario.class);
+                intent.putExtra("TAG_USUARIO",getIntent().getExtras().getString("TAG_USUARIO"));
+                startActivity(intent);
+                overridePendingTransition(R.animator.pushrightin, R.animator.pushrightout);
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
     public Dialog createDialog(String title,String s) {
         //using the builder class

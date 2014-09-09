@@ -67,7 +67,7 @@ public class buscar extends Activity {
         setContentView(layout.buscar);
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        new buscarCasa().execute();
+        if(getIntent().hasExtra("TAG_USUARIO")) new buscarCasa().execute();
         buscar = (Button) findViewById(R.id.buscar_in_btn);
         buscar.setOnClickListener(buscarInButtonhandler);
 

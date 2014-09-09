@@ -124,7 +124,7 @@
             <Button android:id="@+id/usuario_editar_informacion"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="200dip"
+                android:layout_marginTop="150dip"
                 android:text="@string/usuario_publicar"
                 android:background="@color/button"
                 android:textColor="@color/btext"/>

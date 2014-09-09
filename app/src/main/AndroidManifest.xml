@@ -88,6 +88,22 @@
                 android:value="com.ihm.clasificasas.clasificasas.resultados" />
         </activity>
         <activity
+            android:name=".editar"
+            android:label="Editar perfil"
+            android:theme="@android:style/Theme.Holo.Light.DarkActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ihm.clasificasas.clasificasas.usuario" />
+        </activity>
+        <activity
+            android:name=".casausuario"
+            android:label="@string/detalle"
+            android:theme="@android:style/Theme.Holo.Light.DarkActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ihm.clasificasas.clasificasas.usuario" />
+        </activity>
+        <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main" >
         </activity>
