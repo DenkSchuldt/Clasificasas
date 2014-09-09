@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@color/background">
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Editar Informacion:"
+                android:layout_marginTop="30dip"
+                android:textSize="23sp"
+                android:textColor="@color/text"/>
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dip"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nombres: "
+                    android:textSize="20sp"
+                    android:textColor="#fff"/>
+                <EditText
+                    android:id="@+id/usuario_editar_nombres"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Denny K. Schuldt"
+                    android:textSize="20sp"
+                    android:textColor="#fff"/>
+            </LinearLayout>
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Apellidos: "
+                    android:textSize="20sp"
+                    android:textColor="#fff"/>
+                <EditText
+                    android:id="@+id/usuario_editar_apellidos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DenkSchuldt"
+                    android:textSize="20sp"
+                    android:textColor="#fff"/>
+            </LinearLayout>
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Móvil: "
+                    android:textSize="20sp"
+                    android:textColor="#fff"/>
+                <EditText
+                    android:id="@+id/usuario_editar_movil"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0990291056"
+                    android:textSize="20sp"
+                    android:textColor="#fff"
+                    android:layout_marginLeft="35dip"/>
+            </LinearLayout>
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Correo: "
+                    android:textSize="20sp"
+                    android:textColor="#fff"/>
+                <EditText
+                    android:id="@+id/usuario_editar_correo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="dschuldt@outlook.com"
+                    android:textSize="20sp"
+                    android:textColor="#fff"/>
+            </LinearLayout>
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Contraseña: "
+                    android:textSize="20sp"
+                    android:textColor="#fff"/>
+                <EditText
+                    android:id="@+id/usuario_editar_contrasena"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="***********"
+                    android:textSize="20sp"
+                    android:textColor="#fff"/>
+            </LinearLayout>
+            <Button android:id="@+id/usuario_editar_informacion"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="200dip"
+                android:text="@string/usuario_publicar"
+                android:background="@color/button"
+                android:textColor="@color/btext"/>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

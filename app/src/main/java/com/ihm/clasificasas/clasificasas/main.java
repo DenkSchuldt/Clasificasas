@@ -63,7 +63,6 @@ public class main extends Activity {
                 overridePendingTransition(R.animator.pushleftin, R.animator.pushleftout);
             break;
             case R.id.home_ingresar:
-
                 new LoginUsuario().execute();
             break;
             case R.id.home_registrar:
@@ -74,26 +73,26 @@ public class main extends Activity {
         }
         }
     };
+
     public Dialog createDialog(String title,String s) {
-        //using the builder class
         AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
         builder.setTitle(title);
         builder.setMessage(s);
         return builder.create();
     }
-    public  void  showAlertDialog(String title,String message)
-    {
 
+    public  void  showAlertDialog(String title,String message){
         final AlertDialog  alertDialog = new AlertDialog.Builder(this).create();
         alertDialog.setTitle(title);
         alertDialog.setMessage(message);
         alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                alertDialog.dismiss();
+            alertDialog.dismiss();
             }
         });
         alertDialog.show();
     }
+
     /**
      * Background Async Task to Create new product
      * */

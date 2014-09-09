@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,7 +43,7 @@ import java.util.List;
  */
 public class detalle extends Activity {
 
-    ImageButton phoneButton, emailButton, uploadButton;
+    ImageView phoneButton, emailButton, favButton;
     TextView txtmobil, txtcorreo, txtbano, txtdir, txtdes,txtcons, txtterreno, txtpisos,txtcuartos,txtcosto, txtnombres, txtbanos  ;
 
     JSONParser jsonParser = new JSONParser();
@@ -60,26 +61,30 @@ public class detalle extends Activity {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         new obtenerCasa().execute();
-        phoneButton = (ImageButton) findViewById(R.id.detalle_phone_button);
+        phoneButton = (ImageView) findViewById(R.id.detalle_phone_button);
         phoneButton.setOnClickListener(onClickListener);
 
-        emailButton = (ImageButton) findViewById(R.id.detalle_email_button);
+        emailButton = (ImageView) findViewById(R.id.detalle_email_button);
         emailButton.setOnClickListener(onClickListener);
 
-        uploadButton = (ImageButton) findViewById(R.id.detalle_upload_button);
-        uploadButton.setOnClickListener(onClickListener);
-
-
-
+        favButton = (ImageView) findViewById(R.id.detalle_fav_button);
+        favButton.setOnClickListener(onClickListener);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent intent = new Intent(detalle.this, buscar.class);
-                startActivity(intent);
-                overridePendingTransition(R.animator.pushrightin, R.animator.pushrightout);
+                if(getIntent().hasExtra("TAG_USUARIO")){
+                    Intent intent = new Intent(detalle.this, resultados.class);
+                    intent.putExtra("TAG_USUARIO",getIntent().getExtras().getString("TAG_USUARIO"));
+                    startActivity(intent);
+                    overridePendingTransition(R.animator.pushrightin, R.animator.pushrightout);
+                }else{
+                    Intent intent = new Intent(detalle.this, resultados.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.animator.pushrightin, R.animator.pushrightout);
+                }
                 finish();
                 return true;
             default:
@@ -89,38 +94,35 @@ public class detalle extends Activity {
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
         public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.detalle_phone_button:
-                    Intent callIntent = new Intent(Intent.ACTION_CALL);
-                    callIntent.setData(Uri.parse("tel:" + txtmobil.getText()));
-                    startActivity(callIntent);
-                    break;
-                case R.id.detalle_email_button:
-                    Intent send = new Intent(Intent.ACTION_SEND);
-                    send.setType("plain/text");
-                    send.putExtra(Intent.EXTRA_EMAIL, new String[] { txtcorreo.getText().toString() });
-                    startActivity(Intent.createChooser(send, "Elija un cliente de correo:"));
-                    break;
-            }
+        switch (v.getId()) {
+            case R.id.detalle_phone_button:
+                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                callIntent.setData(Uri.parse("tel:" + txtmobil.getText()));
+                startActivity(callIntent);
+                break;
+            case R.id.detalle_email_button:
+                Intent send = new Intent(Intent.ACTION_SEND);
+                send.setType("plain/text");
+                send.putExtra(Intent.EXTRA_EMAIL, new String[] { txtcorreo.getText().toString() });
+                startActivity(Intent.createChooser(send, "Elija un cliente de correo:"));
+                break;
+        }
         }
     };
 
     class obtenerCasa extends AsyncTask<String, Void, JSONArray> {
         String id="1";
         JSONArray casa;
+
         @Override
         protected JSONArray doInBackground(String... params) {
-
             List<NameValuePair> p = new ArrayList<NameValuePair>();
             p.add(new BasicNameValuePair("idcasapublicada", id));
-
             JSONObject json = jsonParser.makeHttpRequest(url_get,"POST", p);
             try {
                 int success = json.getInt(TAG_SUCCESS);
                 if (success == 1) {
-
                      casa = json.getJSONArray(TAG_CASA);
-
                 } else {
                 }
             } catch (JSONException e) {
@@ -128,9 +130,9 @@ public class detalle extends Activity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
             return casa;
         }
+
         @Override
         protected void onPostExecute(JSONArray casa) {
             try {
@@ -176,9 +178,7 @@ public class detalle extends Activity {
                 txtnombres.setText(nombre);
                 txtbanos = (TextView) findViewById(R.id.txtbanos);
                 txtbanos.setText(banos);
-
             }catch (Exception e){}
         }
-
     }
 }
