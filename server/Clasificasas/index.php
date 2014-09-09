@@ -67,5 +67,16 @@
 		<input type="submit">
 	</form>
 	
+	<h1>datos de casa</h1>
+	<form action="obtenerdatosdecasa.php" method="post">
+		idcasapublicada: <input type="text" name="idcasapublicada"><br>
+		<input type="submit">
+	</form>
+	
+	<h1>Obtener max y min</h1>
+	<form action="obtenermaxymin.php" method="post">
+		<input type="submit">
+	</form>
+	
 	</body>
 </html>

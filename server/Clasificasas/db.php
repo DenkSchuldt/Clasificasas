@@ -134,9 +134,9 @@
 				return false;
 		}
 		
-		public function obtenerdatosdeusuario($connect_db,$username, $password ) { 
+		public function obtenerdatosdeusuario($connect_db,$username) { 
 			 
-			$result = mysqli_query($connect_db,"SELECT * FROM usuario WHERE usuario = '$username' AND cont = '$password' "); 
+			$result = mysqli_query($connect_db,"SELECT * FROM usuario WHERE usuario = '$username'"); 
 			
 			if ( mysqli_num_rows($result) == 1 ) { 
 				return $result; 
@@ -156,7 +156,17 @@
 		}
 		
 		public function obtenerdatosdecasa($connect_db,$idcasapublicada){
-			$result = mysqli_query($connect_db,"SELECT * FROM casapublicada WHERE idcasapublicada = '$idcasapublicada'"); 
+			$result = mysqli_query($connect_db,"SELECT * FROM casapublicada cp , usuario u WHERE cp.idcasapublicada = '$idcasapublicada' AND cp.idusuario = u.idusuario "); 
+			
+			if ( mysqli_num_rows($result) >= 1 ) { 
+				return $result; 
+			} else { 
+				return ""; 
+			} 
+		}
+		
+		public function obtenermaxymin($connect_db){
+			$result = mysqli_query($connect_db,"SELECT MAX(costo) AS max, MIN(costo) AS min FROM casapublicada;"); 
 			
 			if ( mysqli_num_rows($result) >= 1 ) { 
 				return $result; 
