@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin">
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical" >
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/buscar_ciudad"
+                android:textSize="22dp"/>
+            <Spinner
+                android:id="@+id/buscar_in_ciudad"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:prompt="@string/buscar_ciudad"
+                style="@style/spinner"/>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/buscar_tipo_casa"
+                android:layout_marginTop="10dip"
+                android:textSize="22dp"/>
+            <Spinner
+                android:id="@+id/buscar_in_tipo_casa"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:prompt="@string/buscar_tipo_casa"
+                android:textSize="40dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/buscar_cuartos"
+                android:layout_marginTop="10dip"
+                android:textSize="22dp"/>
+            <EditText
+                android:id="@+id/buscar_cuartos_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:textSize="22dp"
+                android:layout_marginTop="-37dip"
+                android:layout_marginLeft="90dip"
+                android:inputType="numberDecimal"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/buscar_banos"
+                android:layout_marginTop="-38dp"
+                android:layout_marginLeft="180dp"
+                android:textSize="22dp"/>
+            <EditText
+                android:id="@+id/buscar_banos_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:textSize="22dp"
+                android:layout_marginTop="-36dip"
+                android:layout_marginLeft="255dip"
+                android:inputType="numberDecimal"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/buscar_pisos"
+                android:layout_marginTop="10dip"
+                android:textSize="22dp"/>
+            <EditText
+                android:id="@+id/buscar_pisos_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:textSize="22dp"
+                android:layout_marginTop="-38dip"
+                android:layout_marginLeft="90dip"
+                android:inputType="numberDecimal"/>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/buscar_presupuesto_label"
+                android:layout_marginTop="10dip"
+                android:textSize="22dp"/>
+            <SeekBar
+                android:id="@+id/buscar_in_seek"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:progress="50"/>
+            <TextView
+                android:id="@+id/buscar_min_value"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/buscar_max"
+                android:textSize="22dp"/>
+            <TextView
+                android:id="@+id/buscar_max_value"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/buscar_max"
+                android:gravity="end"
+                android:textSize="22dp"
+                android:layout_marginTop="-28dip"/>
+
+            <EditText
+                android:id="@+id/buscar_presupuesto"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/buscar_presupuesto"
+                android:gravity="center"
+                android:textSize="55dp"
+                android:layout_marginTop="20dip"
+                android:inputType="numberDecimal"/>
+
+            <Button android:id="@+id/buscar_avanzada_btn"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/buscar_buscar"
+                android:layout_marginTop="40dip"/>
+            </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

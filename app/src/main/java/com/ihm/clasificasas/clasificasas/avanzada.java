@@ -8,22 +8,23 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Spinner;
-
 import android.widget.Button;
 import android.widget.SeekBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 
-import static com.ihm.clasificasas.clasificasas.R.*;
+import static com.ihm.clasificasas.clasificasas.R.animator;
+import static com.ihm.clasificasas.clasificasas.R.id;
+import static com.ihm.clasificasas.clasificasas.R.layout;
 
 /**
  * Created by Denny on 28/07/2014.
  */
-public class buscar extends Activity {
+public class avanzada extends Activity {
 
     SeekBar seekBar;
     TextView presupuesto;
-    Button buscar, avanzada;
+    Button buscar;
 
     Spinner spinner_ciudad;
     Spinner spinner_tipo;
@@ -65,18 +66,15 @@ public class buscar extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(layout.buscar);
+        setContentView(layout.avanzada);
         ActionBar actionBar = getActionBar();
         //Log.v("database", leerDatabase());
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        buscar = (Button) findViewById(R.id.buscar_in_btn);
+        buscar = (Button) findViewById(id.buscar_avanzada_btn);
         buscar.setOnClickListener(buscarInButtonhandler);
 
-        avanzada = (Button) findViewById(id.buscar_avanzada);
-        avanzada.setOnClickListener(buscarInButtonhandler);
-
-        spinner_ciudad = (Spinner)findViewById(R.id.buscar_in_ciudad);
+        spinner_ciudad = (Spinner)findViewById(id.buscar_in_ciudad);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, ciudades);
         spinner_ciudad.setAdapter(adapter);
         spinner_ciudad.setOnItemSelectedListener(
@@ -93,7 +91,7 @@ public class buscar extends Activity {
             }
         );
 
-        spinner_tipo = (Spinner)findViewById(R.id.buscar_in_tipo_casa);
+        spinner_tipo = (Spinner)findViewById(id.buscar_in_tipo_casa);
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, tipo);
         spinner_tipo.setAdapter(adapter2);
         spinner_tipo.setOnItemSelectedListener(
@@ -110,9 +108,9 @@ public class buscar extends Activity {
             }
         );
 
-        presupuesto = (TextView) findViewById(R.id.buscar_presupuesto);
+        presupuesto = (TextView) findViewById(id.buscar_presupuesto);
 
-        seekBar = (SeekBar) findViewById(R.id.buscar_in_seek);
+        seekBar = (SeekBar) findViewById(id.buscar_in_seek);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {}
@@ -129,19 +127,12 @@ public class buscar extends Activity {
     View.OnClickListener buscarInButtonhandler = new View.OnClickListener() {
         public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.buscar_in_btn:
-                Intent resultados = new Intent(com.ihm.clasificasas.clasificasas.buscar.this, resultados.class);
+            case id.buscar_avanzada_btn:
+                Intent resultados = new Intent(avanzada.this, resultados.class);
                 if(getIntent().hasExtra("TAG_USUARIO"))
                     resultados.putExtra("TAG_USUARIO",getIntent().getExtras().getString("TAG_USUARIO"));
                 startActivity(resultados);
-                overridePendingTransition(R.animator.pushleftin, R.animator.pushleftout);
-                break;
-            case R.id.buscar_avanzada:
-                Intent avanzada = new Intent(com.ihm.clasificasas.clasificasas.buscar.this, avanzada.class);
-                if(getIntent().hasExtra("TAG_USUARIO"))
-                    avanzada.putExtra("TAG_USUARIO",getIntent().getExtras().getString("TAG_USUARIO"));
-                startActivity(avanzada);
-                overridePendingTransition(R.animator.pushleftin, R.animator.pushleftout);
+                overridePendingTransition(animator.pushleftin, animator.pushleftout);
                 break;
         }
         }
@@ -151,16 +142,11 @@ public class buscar extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                if(getIntent().hasExtra("TAG_USUARIO")){
-                    Intent intent = new Intent(com.ihm.clasificasas.clasificasas.buscar.this, main.class);
+                Intent intent = new Intent(avanzada.this, buscar.class);
+                if(getIntent().hasExtra("TAG_USUARIO"))
                     intent.putExtra("TAG_USUARIO",getIntent().getExtras().getString("TAG_USUARIO"));
-                    startActivity(intent);
-                    overridePendingTransition(animator.pushrightin, animator.pushrightout);
-                }else{
-                    Intent intent = new Intent(com.ihm.clasificasas.clasificasas.buscar.this, main.class);
-                    startActivity(intent);
-                    overridePendingTransition(animator.pushrightin, animator.pushrightout);
-                }
+                startActivity(intent);
+                overridePendingTransition(animator.pushrightin, animator.pushrightout);
                 finish();
                 return true;
             default:

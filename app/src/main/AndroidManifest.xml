@@ -64,6 +64,14 @@
                 android:value="com.ihm.clasificasas.clasificasas.usuario" />
         </activity>
         <activity
+            android:name=".avanzada"
+            android:label="@string/buscar_avanzada"
+            android:theme="@android:style/Theme.Holo.Light.DarkActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ihm.clasificasas.clasificasas.buscar" />
+        </activity>
+        <activity
             android:name=".publicar"
             android:label="@string/publicar"
             android:theme="@android:style/Theme.Holo.Light.DarkActionBar" >

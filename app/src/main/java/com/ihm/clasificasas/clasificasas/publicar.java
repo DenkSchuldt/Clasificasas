@@ -409,12 +409,12 @@ public class publicar extends FragmentActivity {
     public void uploadPhoto(final File f) {
         new Thread(new Runnable() {
             public void run() {
-                uploadFile(f);
+                //uploadFile(f);
             }
         }).start();
     }
 
-    public int uploadFile(File sourceFile) {
+    /*public int uploadFile(File sourceFile) {
         String fileName = sourceFile.getName();
         String extension = getFileExtension(fileName);
 
@@ -497,7 +497,7 @@ public class publicar extends FragmentActivity {
             }
             return serverResponseCode;
         }
-    }
+    }*/
 
     public String getFileExtension(String name) {
         String extension = "";

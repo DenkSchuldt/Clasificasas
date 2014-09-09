@@ -1,4 +1,7 @@
 <resources>
     <color name="blue">#00abea</color>
     <color name="white">#ffffff</color>
+    <color name="button">#EA5E00</color>
+    <color name="btext">#fff</color>
+    <color name="text">#fff</color>
 </resources>

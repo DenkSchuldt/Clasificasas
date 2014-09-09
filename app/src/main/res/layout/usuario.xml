@@ -7,26 +7,229 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin">
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="#1A1A17">
 
-    <Button android:id="@+id/usuario_buscar"
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/home_buscar"/>
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical" >
 
-    <!--<fragment xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/map"
-        android:clickable="true"
-        android:layout_marginTop="50dp"
-        android:layout_height="300dp"
-        android:layout_width="match_parent"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        />-->
+            <Button android:id="@+id/usuario_buscar"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/home_buscar"
+                android:background="@color/button"
+                android:textColor="@color/btext"/>
 
-    <Button android:id="@+id/usuario_publicar"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/usuario_publicar"
-        android:layout_marginTop="440dip"/>
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Informacion del usuario:"
+                android:layout_marginTop="30dip"
+                android:textSize="23sp"
+                android:textColor="@color/text"/>
+            <ImageButton
+                android:layout_width="50dip"
+                android:layout_height="50dip"
+                android:layout_gravity="end"
+                android:layout_marginTop="-40dip"
+                android:src="@drawable/edit"/>
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nombre: "
+                    android:textSize="20sp"
+                    android:textColor="#fff"/>
+                <TextView
+                    android:id="@+id/usuario_nombre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Denny K. Schuldt"
+                    android:textSize="20sp"
+                    android:textColor="#fff"/>
+            </LinearLayout>
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
 
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Usuario: "
+                    android:textSize="20sp"
+                    android:textColor="#fff"/>
+                <TextView
+                    android:id="@+id/usuario_usuario"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DenkSchuldt"
+                    android:textSize="20sp"
+                    android:textColor="#fff"/>
+            </LinearLayout>
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Correo: "
+                    android:textSize="20sp"
+                    android:textColor="#fff"/>
+                <TextView
+                    android:id="@+id/usuario_correo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="dschuldt@outlook.com"
+                    android:textSize="20sp"
+                    android:textColor="#fff"/>
+            </LinearLayout>
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Móvil: "
+                    android:textSize="20sp"
+                    android:textColor="#fff"/>
+                <TextView
+                    android:id="@+id/usuario_movil"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0990291056"
+                    android:textSize="20sp"
+                    android:textColor="#fff"/>
+            </LinearLayout>
+
+
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Casas publicadas:"
+                android:layout_marginTop="30dip"
+                android:textSize="23sp"
+                android:textColor="#fff"/>
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/publicada1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dip"
+                android:background="#fff"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="200dip"
+                    android:layout_height="wrap_content"
+                    android:text="Samanes 3.."
+                    android:paddingTop="5dip"
+                    android:paddingBottom="5dip"
+                    android:textSize="20sp"/>
+                <TextView
+                    android:layout_width="120dip"
+                    android:layout_height="wrap_content"
+                    android:text="$1000"
+                    android:paddingTop="5dip"
+                    android:paddingBottom="5dip"
+                    android:gravity="end"
+                    android:textSize="20sp"/>
+            </LinearLayout>
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/publicada2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dip"
+                android:background="#fff"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="200dip"
+                    android:layout_height="wrap_content"
+                    android:text="Samanes 3.."
+                    android:paddingTop="5dip"
+                    android:paddingBottom="5dip"
+                    android:textSize="20sp"/>
+                <TextView
+                    android:layout_width="120dip"
+                    android:layout_height="wrap_content"
+                    android:text="$1000"
+                    android:paddingTop="5dip"
+                    android:paddingBottom="5dip"
+                    android:gravity="end"
+                    android:textSize="20sp"/>
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/usuario_favoritas_label"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Casas favoritas:"
+                android:layout_marginTop="30dip"
+                android:textSize="23sp"
+                android:textColor="#fff"/>
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/favorita1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dip"
+                android:background="#fff"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="200dip"
+                    android:layout_height="wrap_content"
+                    android:text="Samanes 3.."
+                    android:paddingTop="5dip"
+                    android:paddingBottom="5dip"
+                    android:textSize="20sp"/>
+                <TextView
+                    android:layout_width="120dip"
+                    android:layout_height="wrap_content"
+                    android:text="$1000"
+                    android:paddingTop="5dip"
+                    android:paddingBottom="5dip"
+                    android:gravity="end"
+                    android:textSize="20sp"/>
+            </LinearLayout>
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/favorita2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dip"
+                android:background="#fff"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="200dip"
+                    android:layout_height="wrap_content"
+                    android:text="Samanes 3.."
+                    android:paddingTop="5dip"
+                    android:paddingBottom="5dip"
+                    android:textSize="20sp"/>
+                <TextView
+                    android:layout_width="120dip"
+                    android:layout_height="wrap_content"
+                    android:text="$1000"
+                    android:paddingTop="5dip"
+                    android:paddingBottom="5dip"
+                    android:gravity="end"
+                    android:textSize="20sp"/>
+            </LinearLayout>
+            <Button android:id="@+id/usuario_publicar"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dip"
+                android:text="@string/usuario_publicar"
+                android:background="@color/button"
+                android:textColor="@color/btext"/>
+        </LinearLayout>
+    </ScrollView>
 </RelativeLayout>
