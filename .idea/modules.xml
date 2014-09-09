@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Clasificasas.iml" filepath="$PROJECT_DIR$/Clasificasas.iml" />
       <module fileurl="file://$PROJECT_DIR$/GooglePlayServices/GooglePlayServices .iml" filepath="$PROJECT_DIR$/GooglePlayServices/GooglePlayServices .iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>

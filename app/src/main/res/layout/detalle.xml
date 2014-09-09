@@ -20,7 +20,8 @@
                 android:text="$200,000"
                 android:textSize="25dip"
                 android:layout_marginTop="10dip"
-                android:layout_marginLeft="10dip"/>
+                android:layout_marginLeft="10dip"
+                android:id="@+id/txtcosto"/>
             <ImageButton
                 android:id="@+id/detalle_upload_button"
                 android:layout_width="50dip"
@@ -47,7 +48,8 @@
                 android:text="Ubicación: Samanes 3"
                 android:textSize="22dip"
                 android:layout_marginTop="10dip"
-                android:layout_marginLeft="10dip"/>
+                android:layout_marginLeft="10dip"
+                android:id="@+id/txtdireccion" />
             <!--<fragment xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/map"
                 android:clickable="true"
@@ -67,35 +69,40 @@
                 android:text="Cuartos: 4"
                 android:textSize="22dip"
                 android:layout_marginTop="10dip"
-                android:layout_marginLeft="10dip"/>
+                android:layout_marginLeft="10dip"
+                android:id="@+id/txtcuartos" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Baños: 4"
                 android:textSize="22dip"
                 android:layout_marginTop="-26dip"
-                android:layout_marginLeft="180dip"/>
+                android:layout_marginLeft="180dip"
+                android:id="@+id/txtbanos" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Pisos: 2"
                 android:textSize="22dip"
                 android:layout_marginTop="2dip"
-                android:layout_marginLeft="10dip"/>
+                android:layout_marginLeft="10dip"
+                android:id="@+id/txtpisos" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Terreno: 20 m&lt;sup&gt;2/sup&gt;"
                 android:textSize="22dip"
                 android:layout_marginTop="2dip"
-                android:layout_marginLeft="10dip"/>
+                android:layout_marginLeft="10dip"
+                android:id="@+id/txtterreno" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Construcción: 15 m&lt;sup&gt;2/sup&gt;"
                 android:textSize="22dip"
                 android:layout_marginTop="2dip"
-                android:layout_marginLeft="10dip"/>
+                android:layout_marginLeft="10dip"
+                android:id="@+id/txtcons" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -109,7 +116,8 @@
                 android:text="Lorem Ipsum es simplemente el textos de relleno las imprenta Lorem Ipsum es simplemente el textos de relleno las imprenta Lorem Ipsum es simplemente el textos de relleno las imprenta..."
                 android:textSize="20dip"
                 android:layout_marginLeft="10dip"
-                android:layout_marginRight="10dip"/>
+                android:layout_marginRight="10dip"
+                android:id="@+id/txtdes" />
             <View
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
@@ -121,16 +129,18 @@
                 android:text="Vendedor: Liliana Ramos"
                 android:textSize="22dip"
                 android:layout_marginTop="2dip"
-                android:layout_marginLeft="10dip"/>
+                android:layout_marginLeft="10dip"
+                android:id="@+id/txtusu"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Móvil:"
                 android:textSize="22dip"
                 android:layout_marginTop="2dip"
-                android:layout_marginLeft="10dip"/>
+                android:layout_marginLeft="10dip"
+                />
             <TextView
-                android:id="@+id/detalle_phone"
+                android:id="@+id/txtmobil"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0988569184"
@@ -143,15 +153,17 @@
                 android:text="Correo:"
                 android:textSize="22dip"
                 android:layout_marginTop="2dip"
-                android:layout_marginLeft="10dip"/>
+                android:layout_marginLeft="10dip"
+                />
             <TextView
-                android:id="@+id/detalle_email"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="dschuldt@outlook.com"
                 android:textSize="22dip"
                 android:layout_marginTop="-30dip"
-                android:layout_marginLeft="90dip"/>
+                android:layout_marginLeft="90dip"
+                android:id="@+id/txtmail"/>
             <ImageButton
                 android:id="@+id/detalle_phone_button"
                 android:layout_width="50dip"
