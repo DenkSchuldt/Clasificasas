@@ -3,11 +3,13 @@ package com.ihm.clasificasas.clasificasas;
 import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Criteria;
 import android.location.Geocoder;
@@ -20,12 +22,15 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
+import android.util.Xml;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -43,11 +48,25 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xmlpull.v1.XmlSerializer;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 /**
  * Created by Denny on 28/07/2014.
@@ -56,16 +75,14 @@ public class publicar extends FragmentActivity {
 
     Button publicar;
     Spinner spinner_tipo, spinner_ciudad;
+    ImageView portada;
     EditText costo, ubicacion, cuartos, banos, pisos, terreno, construccion, descripcion;
-    String url_publicar = "http://"+IP.address+"/clasificasas/publicarcasa.php";
-    String url_upload = "http://"+IP.address+"/clasificasas/upload_file.php";
-    String TAG_SUCCESS = "success";
-    String TAG_USUARIO = "usuario";
-    String TAG_MESSAGE = "message";
-    int serverResponseCode = 0;
-    JSONParser jsonParser = new JSONParser();
+    int idglobal = 1;
 
-    private Uri mImageCaptureUri;
+    Uri mImageCaptureUri;
+    boolean saved = false;
+    String savedname = "";
+
     private Bitmap ImagenActual;
     private static final int PICK_FROM_CAMERA = 1;
     private static final int PICK_FROM_FILE = 2;
@@ -87,12 +104,9 @@ public class publicar extends FragmentActivity {
         "Salinas"
     };
 
-    SupportMapFragment fm;
     GoogleMap googleMap;
     MapFragment mMapFragment;
-    MarkerOptions moself=new MarkerOptions();
-    MarkerOptions mohome=new MarkerOptions();
-
+    MarkerOptions mohome = new MarkerOptions();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +115,7 @@ public class publicar extends FragmentActivity {
 
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+
         prepareImagePicker();
 
         costo = (EditText) findViewById(R.id.publicar_costo);
@@ -120,54 +135,88 @@ public class publicar extends FragmentActivity {
         ArrayAdapter<String> ciudades = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, ciudad);
         spinner_ciudad.setAdapter(ciudades);
 
-        publicar = (Button) findViewById(R.id.publicar);
+        publicar = (Button) findViewById(R.id.publicar_button);
         publicar.setOnClickListener(publicarButtonhandler);
 
-        fm = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-        googleMap = fm.getMap();
+        int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+        while(resultCode != ConnectionResult.SUCCESS){
+            resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+        }
+
+        googleMap = ((SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
         googleMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
-
-        moself.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
-        moself.title("yo");
-
-        mohome.icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.home)));
-        mohome.title("Casa");
+        mohome.icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.locationpoint)));
+        mohome.title("Ubicación");
         mohome.draggable(true);
-        //mostrarPosicionActual();
-        Button btn_find = (Button) findViewById(R.id.home_buscar);
-        View.OnClickListener findClickListener = new View.OnClickListener() {
+
+        mostrarPosicionActual();
+
+        googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
-            public void onClick(View v) {
-            EditText etLocation = (EditText) findViewById(R.id.publicar_ubicacion);
-            String location = etLocation.getText().toString();
-            if(location!=null && !location.equals("")){
-                new GeocoderTask().execute(location);
+            public void onMapClick(LatLng latLng) {
+                Intent intent = new Intent(publicar.this, MapViewer.class);
+                intent.putExtra("TAG_USUARIO", getIntent().getExtras().getString("TAG_USUARIO"));
+                intent.putExtra("TAG_COSTO", costo.getText().toString());
+                intent.putExtra("TAG_TIPO",spinner_tipo.getSelectedItemPosition());
+                intent.putExtra("TAG_FOTO", savedname);
+                intent.putExtra("TAG_IDGLOBAL", idglobal);
+                intent.putExtra("TAG_CIUDAD", spinner_ciudad.getSelectedItemPosition());
+                intent.putExtra("TAG_UBICACION", ubicacion.getText().toString());
+                intent.putExtra("TAG_LATITUD", mohome.getPosition().latitude);
+                intent.putExtra("TAG_LONGITUD",mohome.getPosition().longitude);
+                intent.putExtra("TAG_CUARTOS", cuartos.getText().toString());
+                intent.putExtra("TAG_BANOS", banos.getText().toString());
+                intent.putExtra("TAG_PISOS", pisos.getText().toString());
+                intent.putExtra("TAG_TERRENO", terreno.getText().toString());
+                intent.putExtra("TAG_CONSTRUCCION", construccion.getText().toString());
+                intent.putExtra("TAG_DESCRIPCION", descripcion.getText().toString());
+                startActivity(intent);
+                overridePendingTransition(R.animator.pushleftin, R.animator.pushleftout);
             }
+        });
+
+        Button publicar = (Button) findViewById(R.id.publicar_button);
+        publicar.setOnClickListener(publicarButtonhandler);
+
+        if(getIntent().hasExtra("TAG_FOTO")){
+            File sdDir = new File(Environment.getExternalStorageDirectory() + "/CLASIFICASAS/fotos");
+            File[] sdDirFiles = sdDir.listFiles();
+            for(File singleFile : sdDirFiles){
+                if(singleFile.getName().equals(getIntent().getExtras().getString("TAG_FOTO"))){
+                    portada.setImageDrawable(Drawable.createFromPath(singleFile.getAbsolutePath()));
+                    savedname = getIntent().getExtras().getString("TAG_FOTO");
+                    saved = true;
+                }
             }
-        };
-        btn_find.setOnClickListener(findClickListener);
+            idglobal = getIntent().getExtras().getInt("TAG_IDGLOBAL");
+            costo.setText(getIntent().getExtras().getString("TAG_COSTO"));
+            spinner_tipo.setSelection(getIntent().getExtras().getInt("TAG_TIPO"));
+            spinner_ciudad.setSelection(getIntent().getExtras().getInt("TAG_CIUDAD"));
+            cuartos.setText(getIntent().getExtras().getString("TAG_CUARTOS"));
+            pisos.setText(getIntent().getExtras().getString("TAG_PISOS"));
+            banos.setText(getIntent().getExtras().getString("TAG_BANOS"));
+            terreno.setText(getIntent().getExtras().getString("TAG_TERRENO"));
+            construccion.setText(getIntent().getExtras().getString("TAG_CONSTRUCCION"));
+            descripcion.setText(getIntent().getExtras().getString("TAG_DESCRIPCION"));
+            new GeocoderTaskInverso().execute(getIntent().getExtras().getDouble("TAG_LATITUD"),getIntent().getExtras().getDouble("TAG_LONGITUD"));
+            mohome.position(new LatLng(getIntent().getExtras().getDouble("TAG_LATITUD"), getIntent().getExtras().getDouble("TAG_LONGITUD")));
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(mohome.getPosition().latitude,mohome.getPosition().longitude), 18.0f));
+            refreshMarkers();
+        }
+
     }
 
     public void mostrarPosicionActual(){
-        // Getting reference to the SupportMapFragment of activity_main.xml
-        // Getting GoogleMap object from the fragment
-        if(!verifygoogleavailability()){
+        if(!verifyGoogleavAilability()){
             return;
         }
-        // Enabling MyLocation Layer of Google Map
         googleMap.setMyLocationEnabled(true);
-        // Getting LocationManager object from System Service LOCATION_SERVICE
         final LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        // Creating a criteria object to retrieve provider
         Criteria criteria = new Criteria();
-        // Getting the name of the best provider
         final String provider = locationManager.getBestProvider(criteria, true);
-        // Getting Current Location
         final Location location = locationManager.getLastKnownLocation(provider);
         final LocationListener locationListener = new LocationListener() {
             public void onLocationChanged(Location location) {
-                // redraw the marker when get location update.
-                setMarker(location, googleMap, moself);
                 refreshMarkers();
             }
             @Override
@@ -178,28 +227,27 @@ public class publicar extends FragmentActivity {
             public void onProviderDisabled(String provider) {}
         };
         if(location!=null){
-            //PLACE THE INITIAL MARKER
-            setMarker(location,googleMap,moself);
             setMarker(location,googleMap,mohome);
             refreshMarkers();
         }
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 18.0f));
         locationManager.requestLocationUpdates(provider,20000,0,locationListener);
     }
+
     private void refreshMarkers(){
         googleMap.clear();
-        googleMap.addMarker(moself);
         googleMap.addMarker(mohome);
     }
+
     private void setMarker(Location location,GoogleMap googleMap,MarkerOptions mo){
         LatLng Position = new LatLng(location.getLatitude(),location.getLongitude());
         mo.position(Position);
         mo.snippet("Lat:" + location.getLatitude() + "Lng:" + location.getLongitude());
     }
-    public boolean verifygoogleavailability(){
+
+    public boolean verifyGoogleavAilability(){
         int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getBaseContext());
-        // Showing status
-        if(status!= ConnectionResult.SUCCESS){ // Google Play Services are not available
+        if(status!= ConnectionResult.SUCCESS){
             int requestCode = 10;
             Dialog dialog = GooglePlayServicesUtil.getErrorDialog(status, this, requestCode);
             dialog.show();
@@ -216,7 +264,6 @@ public class publicar extends FragmentActivity {
                 intent.putExtra("TAG_USUARIO", getIntent().getExtras().getString("TAG_USUARIO"));
                 startActivity(intent);
                 overridePendingTransition(R.animator.pushrightin, R.animator.pushrightout);
-                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -226,66 +273,371 @@ public class publicar extends FragmentActivity {
     View.OnClickListener publicarButtonhandler = new View.OnClickListener() {
         public void onClick(View v) {
             switch (v.getId()) {
-                case R.id.publicar:
-                    //Intent buscar = new Intent(publicar.this, com.ihm.clasificasas.clasificasas.buscar.class);
-                    //startActivity(buscar);
-                    //overridePendingTransition(R.animator.pushleftin, R.animator.pushleftout);
-
-                    File file = new File(path);
-                    uploadPhoto(file);
+                case R.id.publicar_button:
+                    if(validar()) {
+                        try {
+                            if (publicarCasa()) {
+                                Intent intent = new Intent(publicar.this, usuario.class);
+                                intent.putExtra("TAG_USUARIO", getIntent().getExtras().getString("TAG_USUARIO"));
+                                startActivity(intent);
+                                overridePendingTransition(R.animator.pushrightin, R.animator.pushrightout);
+                                finish();
+                            } else {
+                                Context context = getApplicationContext();
+                                CharSequence text = "Algo salió mal. Inténtelo nuevamente.";
+                                Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
+                                toast.show();
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    break;
+                case R.id.publicar_portada:
 
                     break;
             }
         }
     };
 
+    public boolean publicarCasa() throws IOException {
+        File newxmlfile = new File(Environment.getExternalStorageDirectory()+"/CLASIFICASAS/publicaciones.xml");
+        boolean success = true;
+        if (!newxmlfile.exists()) {
+            success = newxmlfile.createNewFile();
+            if (success) {
+                FileOutputStream fileos = new FileOutputStream(newxmlfile);
+                XmlSerializer serializer = Xml.newSerializer();
+                try {
+                    serializer.setOutput(fileos, "UTF-8");
+                    serializer.startDocument(null, Boolean.valueOf(true));
+                    serializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
+                    serializer.startTag(null, "publicaciones");
+                        serializer.startTag(null, "publicacion");
+                            serializer.startTag(null,"id");
+                            serializer.text("1");
+                            serializer.endTag(null, "id");
+                            serializer.startTag(null, "usuario");
+                            serializer.text(getIntent().getExtras().getString("TAG_USUARIO"));
+                            serializer.endTag(null, "usuario");
+                            serializer.startTag(null, "costo");
+                            serializer.text(costo.getText().toString());
+                            serializer.endTag(null, "costo");
+                            serializer.startTag(null, "tipo");
+                            serializer.text(spinner_tipo.getSelectedItem().toString());
+                            serializer.endTag(null, "tipo");
+                            serializer.startTag(null, "foto");
+                            serializer.text(savedname);
+                            serializer.endTag(null, "foto");
+                            serializer.startTag(null, "ciudad");
+                            serializer.text(spinner_ciudad.getSelectedItem().toString());
+                            serializer.endTag(null, "ciudad");
+                            serializer.startTag(null, "ubicacion");
+                            serializer.text(ubicacion.getText().toString());
+                            serializer.endTag(null, "ubicacion");
+                            serializer.startTag(null, "latitud");
+                            serializer.text("" + mohome.getPosition().latitude);
+                            serializer.endTag(null, "latitud");
+                            serializer.startTag(null, "longitud");
+                            serializer.text("" + mohome.getPosition().longitude);
+                            serializer.endTag(null, "longitud");
+                            serializer.startTag(null, "cuartos");
+                            serializer.text(cuartos.getText().toString());
+                            serializer.endTag(null, "cuartos");
+                            serializer.startTag(null, "banos");
+                            serializer.text(banos.getText().toString());
+                            serializer.endTag(null, "banos");
+                            serializer.startTag(null, "pisos");
+                            serializer.text(pisos.getText().toString());
+                            serializer.endTag(null, "pisos");
+                            serializer.startTag(null, "terreno");
+                            serializer.text(terreno.getText().toString());
+                            serializer.endTag(null, "terreno");
+                            serializer.startTag(null, "construccion");
+                            serializer.text(construccion.getText().toString());
+                            serializer.endTag(null, "construccion");
+                            serializer.startTag(null, "descripcion");
+                            serializer.text(descripcion.getText().toString());
+                            serializer.endTag(null, "descripcion");
+                        serializer.endTag(null, "publicacion");
+                    serializer.endTag(null, "publicaciones");
+                    serializer.endDocument();
+                    serializer.flush();
+                    fileos.close();
+                    return true;
+                } catch (Exception e) {
+                    Log.e("Exception", "error occurred while creating xml file");
+                }
+            }
+        }else {
+            try {
+                InputStream is = new FileInputStream(newxmlfile.getPath());
+                DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+                DocumentBuilder db = dbf.newDocumentBuilder();
+                Document doc = db.parse(new InputSource(is));
+                doc.getDocumentElement().normalize();
+                NodeList publicaciones = doc.getElementsByTagName("publicacion");
+                FileOutputStream fileos = new FileOutputStream(newxmlfile);
+                XmlSerializer serializer = Xml.newSerializer();
+                serializer.setOutput(fileos, "UTF-8");
+                serializer.startDocument(null, Boolean.valueOf(true));
+                serializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
+                serializer.startTag(null, "publicaciones");
+                for(int i=0; i<publicaciones.getLength(); i++){
+                    serializer.startTag(null, "publicacion");
+                        serializer.startTag(null,"id");
+                        serializer.text(publicaciones.item(i).getChildNodes().item(1).getTextContent());
+                        serializer.endTag(null, "id");
+                        serializer.startTag(null,"usuario");
+                        serializer.text(publicaciones.item(i).getChildNodes().item(3).getTextContent());
+                        serializer.endTag(null, "usuario");
+                        serializer.startTag(null,"costo");
+                        serializer.text(publicaciones.item(i).getChildNodes().item(5).getTextContent());
+                        serializer.endTag(null, "costo");
+                        serializer.startTag(null, "tipo");
+                        serializer.text(publicaciones.item(i).getChildNodes().item(7).getTextContent());
+                        serializer.endTag(null, "tipo");
+                        serializer.startTag(null, "foto");
+                        serializer.text(publicaciones.item(i).getChildNodes().item(9).getTextContent());
+                        serializer.endTag(null, "foto");
+                        serializer.startTag(null, "ciudad");
+                        serializer.text(publicaciones.item(i).getChildNodes().item(11).getTextContent());
+                        serializer.endTag(null, "ciudad");
+                        serializer.startTag(null, "ubicacion");
+                        serializer.text(publicaciones.item(i).getChildNodes().item(13).getTextContent());
+                        serializer.endTag(null, "ubicacion");
+                        serializer.startTag(null, "latitud");
+                        serializer.text(publicaciones.item(i).getChildNodes().item(15).getTextContent());
+                        serializer.endTag(null, "latitud");
+                        serializer.startTag(null, "longitud");
+                        serializer.text(publicaciones.item(i).getChildNodes().item(17).getTextContent());
+                        serializer.endTag(null, "longitud");
+                        serializer.startTag(null, "cuartos");
+                        serializer.text(publicaciones.item(i).getChildNodes().item(19).getTextContent());
+                        serializer.endTag(null, "cuartos");
+                        serializer.startTag(null, "banos");
+                        serializer.text(publicaciones.item(i).getChildNodes().item(21).getTextContent());
+                        serializer.endTag(null, "banos");
+                        serializer.startTag(null, "pisos");
+                        serializer.text(publicaciones.item(i).getChildNodes().item(23).getTextContent());
+                        serializer.endTag(null, "pisos");
+                        serializer.startTag(null, "terreno");
+                        serializer.text(publicaciones.item(i).getChildNodes().item(25).getTextContent());
+                        serializer.endTag(null, "terreno");
+                        serializer.startTag(null, "construccion");
+                        serializer.text(publicaciones.item(i).getChildNodes().item(27).getTextContent());
+                        serializer.endTag(null, "construccion");
+                        serializer.startTag(null, "descripcion");
+                        serializer.text(publicaciones.item(i).getChildNodes().item(29).getTextContent());
+                        serializer.endTag(null, "descripcion");
+                    serializer.endTag(null, "publicacion");
+                }
+                serializer.startTag(null, "publicacion");
+                    serializer.startTag(null,"id");
+                    serializer.text("" + idglobal);
+                    serializer.endTag(null, "id");
+                    serializer.startTag(null, "usuario");
+                    serializer.text(getIntent().getExtras().getString("TAG_USUARIO"));
+                    serializer.endTag(null, "usuario");
+                    serializer.startTag(null, "costo");
+                    serializer.text(costo.getText().toString());
+                    serializer.endTag(null, "costo");
+                    serializer.startTag(null, "tipo");
+                    serializer.text(spinner_tipo.getSelectedItem().toString());
+                    serializer.endTag(null, "tipo");
+                    serializer.startTag(null, "foto");
+                    serializer.text(savedname);
+                    serializer.endTag(null, "foto");
+                    serializer.startTag(null, "ciudad");
+                    serializer.text(spinner_ciudad.getSelectedItem().toString());
+                    serializer.endTag(null, "ciudad");
+                    serializer.startTag(null, "ubicacion");
+                    serializer.text(ubicacion.getText().toString());
+                    serializer.endTag(null, "ubicacion");
+                    serializer.startTag(null, "latitud");
+                    serializer.text("" + mohome.getPosition().latitude);
+                    serializer.endTag(null, "latitud");
+                    serializer.startTag(null, "longitud");
+                    serializer.text(""+mohome.getPosition().longitude);
+                    serializer.endTag(null, "longitud");
+                    serializer.startTag(null, "cuartos");
+                    serializer.text(cuartos.getText().toString());
+                    serializer.endTag(null, "cuartos");
+                    serializer.startTag(null, "banos");
+                    serializer.text(banos.getText().toString());
+                    serializer.endTag(null, "banos");
+                    serializer.startTag(null, "pisos");
+                    serializer.text(pisos.getText().toString());
+                    serializer.endTag(null, "pisos");
+                    serializer.startTag(null, "terreno");
+                    serializer.text(terreno.getText().toString());
+                    serializer.endTag(null, "terreno");
+                    serializer.startTag(null, "construccion");
+                    serializer.text(construccion.getText().toString());
+                    serializer.endTag(null, "construccion");
+                    serializer.startTag(null, "descripcion");
+                    serializer.text(descripcion.getText().toString());
+                    serializer.endTag(null, "descripcion");
+                serializer.endTag(null, "publicacion");
+                serializer.endTag(null, "publicaciones");
+                serializer.endDocument();
+                serializer.flush();
+                fileos.close();
+                return true;
+            }catch (Exception e){}
+            return false;
+        }
+        return false;
+    }
+
+    public boolean validar(){
+        Context context = getApplicationContext();
+        if(costo.getText().toString().equals("")) {
+            CharSequence text = "Debe especificar un costo";
+            Toast toast = Toast.makeText(context,text, Toast.LENGTH_SHORT);
+            toast.show();
+            return false;
+        }
+        if(savedname.equals("")){
+            CharSequence text = "Debe especificar una fotografía de la casa";
+            Toast toast = Toast.makeText(context,text, Toast.LENGTH_SHORT);
+            toast.show();
+            return false;
+        }
+        if(ubicacion.getText().toString().equals("")){
+            CharSequence text = "Debe especificar la ubicación de la casa";
+            Toast toast = Toast.makeText(context,text, Toast.LENGTH_SHORT);
+            toast.show();
+            return false;
+        }
+        if(!cuartos.getText().toString().matches("[0-9]+")){
+            CharSequence text = "Debe especificar un número de cuartos válido";
+            Toast toast = Toast.makeText(context,text, Toast.LENGTH_SHORT);
+            toast.show();
+            return false;
+        }
+        if(!banos.getText().toString().matches("[0-9]+")){
+            CharSequence text = "Debe especificar un número de baños válido";
+            Toast toast = Toast.makeText(context,text, Toast.LENGTH_SHORT);
+            toast.show();
+            return false;
+        }
+        if(!pisos.getText().toString().matches("[0-9]+")){
+            CharSequence text = "Debe especificar un número de pisos válido";
+            Toast toast = Toast.makeText(context,text, Toast.LENGTH_SHORT);
+            toast.show();
+            return false;
+        }
+        if(!terreno.getText().toString().matches("[0-9]+")){
+            CharSequence text = "Las medidas del terreno no son válidas";
+            Toast toast = Toast.makeText(context,text, Toast.LENGTH_SHORT);
+            toast.show();
+            return false;
+        }
+        if(!construccion.getText().toString().matches("[0-9]+")){
+            CharSequence text = "Las medidas de la construcción no son válidas";
+            Toast toast = Toast.makeText(context,text, Toast.LENGTH_SHORT);
+            toast.show();
+            return false;
+        }
+        if(descripcion.getText().toString().equals("")){
+            CharSequence text = "Debe especificar una descripción para la casa a publicar";
+            Toast toast = Toast.makeText(context,text, Toast.LENGTH_SHORT);
+            toast.show();
+            return false;
+        }
+        return true;
+    }
+
+    private class GeocoderTaskInverso extends AsyncTask<Double, Void, List<Address>> {
+        LatLng latLng;
+        MarkerOptions markerOptions;
+        @Override
+        protected List<Address> doInBackground(Double... param) {
+            Geocoder geocoder = new Geocoder(getBaseContext());
+            List<Address> addresses = null;
+            try {
+                addresses = geocoder.getFromLocation(param[0],param[1], 3);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return addresses;
+        }
+        @Override
+        protected void onPostExecute(List<Address> addresses) {
+            if(addresses==null || addresses.size()==0){
+                ubicacion.setText("Ubicación desconocida");
+                return;
+            }
+            Address address = (Address) addresses.get(0);
+            String addressText = String.format("%s, %s",
+                    address.getMaxAddressLineIndex() > 0 ? address.getAddressLine(0) : "",
+                    address.getCountryName());
+            ubicacion.setText(addressText);
+        }
+    }
+
     public void prepareImagePicker() {
-        final String[] items = new String[]{"From Camera", "From SD Card"};
+        final String[] items = new String[]{"Desde la cámara", "Desde la tarjeta SD"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.select_dialog_item, items);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Select Image");
+        builder.setTitle("Seleccione una imagen");
         builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
-            if (item == 0) {
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                File file = new File(Environment.getExternalStorageDirectory(),
-                        "tmp_avatar_" + String.valueOf(System.currentTimeMillis()) + ".jpg");
-                mImageCaptureUri = Uri.fromFile(file);
-                try {
-                    intent.putExtra(MediaStore.EXTRA_OUTPUT, mImageCaptureUri);
-                    intent.putExtra("return-data", true);
-                    startActivityForResult(intent, PICK_FROM_CAMERA);
-                } catch (Exception e) {
-                    e.printStackTrace();
+                if (item == 0) {
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    File file = new File(Environment.getExternalStorageDirectory(),getIntent().getExtras().getString("TAG_USUARIO")+"-"+idglobal+ ".jpg");
+                    mImageCaptureUri = Uri.fromFile(file);
+                    try {
+                        intent.putExtra(MediaStore.EXTRA_OUTPUT, mImageCaptureUri);
+                        intent.putExtra("return-data", true);
+                        startActivityForResult(intent, PICK_FROM_CAMERA);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    dialog.cancel();
+                } else {
+                    Intent intent = new Intent();
+                    intent.setType("image/*");
+                    intent.setAction(Intent.ACTION_GET_CONTENT);
+                    startActivityForResult(Intent.createChooser(intent, "Completar acción usando"), PICK_FROM_FILE);
                 }
-                dialog.cancel();
-            } else {
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Complete action using"), PICK_FROM_FILE);
-            }
             }
         });
         final AlertDialog dialog = builder.create();
-        findViewById(R.id.publicar_portada).setOnClickListener(new View.OnClickListener() {
-            //mImageView.setOnClickListener(new View.OnClickListener() {
+        portada = (ImageView) findViewById(R.id.publicar_portada);
+        portada.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            dialog.show();
-            ((ImageButton)findViewById(R.id.publicar_portada)).setImageBitmap(ImagenActual);
-            ((ImageButton)findViewById(R.id.publicar_portada)).setVisibility(ImageButton.VISIBLE);
+                getNewIdPublicacion();
+                dialog.show();
             }
         });
     }
 
-    public String getRealPathFromURI(Uri contentUri) {
-        String [] proj = {MediaStore.Images.Media.DATA};
-        Cursor cursor = managedQuery( contentUri, proj, null, null,null);
-        if (cursor == null) return null;
-        int column_index    = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-        cursor.moveToFirst();
-        return cursor.getString(column_index);
+    public void getNewIdPublicacion(){
+        ArrayList<Integer> ids = new ArrayList<Integer>();
+        try {
+            System.out.println("ANTES DE ABRIR EL ARCHIVO");
+            File file = new File(Environment.getExternalStorageDirectory() + "/CLASIFICASAS/publicaciones.xml");
+            InputStream is = new FileInputStream(file.getPath());
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            Document doc = db.parse(new InputSource(is));
+            doc.getDocumentElement().normalize();
+            NodeList id = doc.getElementsByTagName("id");
+            for(int i=0; i<id.getLength(); i++){
+                ids.add(Integer.parseInt(id.item(i).getTextContent()));
+            }
+            Collections.sort(ids);
+            if(ids.size() != 0){
+                int index = ids.size()-1;
+                int last = ids.get(index);
+                idglobal = last+2;
+            }
+        }catch (Exception e){
+            System.out.println("CATCH!");
+        }
     }
 
     @Override
@@ -303,195 +655,34 @@ public class publicar extends FragmentActivity {
             path = mImageCaptureUri.getPath();
             bitmap = BitmapFactory.decodeFile(path);
         }
-        ImagenActual=bitmap;
-    }
-
-    private class GeocoderTask extends AsyncTask<String, Void, List<Address>> {
-        LatLng latLng;
-        MarkerOptions markerOptions;
-        @Override
-        protected List<Address> doInBackground(String... locationName) {
-            // Creating an instance of Geocoder class
-            Geocoder geocoder = new Geocoder(getBaseContext());
-            List<Address> addresses = null;
+        ImagenActual = bitmap;
+        File file = new File(Environment.getExternalStorageDirectory()+"/CLASIFICASAS/fotos",getIntent().getExtras().getString("TAG_USUARIO")+"-"+idglobal+ ".png");
+        FileOutputStream out = null;
+        try {
+            out = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 10, out);
+            savedname = getIntent().getExtras().getString("TAG_USUARIO")+"-"+idglobal+ ".png";
+            saved = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
             try {
-                // Getting a maximum of 3 Address that matches the input text
-                addresses = geocoder.getFromLocationName(locationName[0], 3);
+                if (out != null) {
+                    out.close();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            return addresses;
         }
-
-        @Override
-        protected void onPostExecute(List<Address> addresses) {
-            if(addresses==null || addresses.size()==0){
-                Toast.makeText(getBaseContext(), "No Location found", Toast.LENGTH_SHORT).show();
-            }
-            // Clears all the existing markers on the map
-            googleMap.clear();
-            // Adding Markers on Google Map for each matching address
-            for(int i=0;addresses!=null&&i<addresses.size();i++){
-                Address address = (Address) addresses.get(i);
-                // Creating an instance of GeoPoint, to display in Google Map
-                latLng = new LatLng(address.getLatitude(), address.getLongitude());
-                String addressText = String.format("%s, %s",
-                        address.getMaxAddressLineIndex() > 0 ? address.getAddressLine(0) : "",
-                        address.getCountryName());
-                markerOptions = new MarkerOptions();
-                markerOptions.position(latLng);
-                markerOptions.title(addressText);
-                googleMap.addMarker(markerOptions);
-                // Locate the first location
-                if(i==0)
-                    googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
-            }
-        }
+        portada.setImageBitmap(ImagenActual);
     }
 
-    /**
-     * Background Async Task to Create new product
-     * */
-    class PublicarCasa extends AsyncTask<String, String, String> {
-        @Override
-        protected String doInBackground(String... params) {
-            List<NameValuePair> p = new ArrayList<NameValuePair>();
-
-            p.add(new BasicNameValuePair("usuario",getIntent().getExtras().getString("TAG_USUARIO")));
-            //p.add(new BasicNameValuePair("latitud", user.getText().toString()));
-            //p.add(new BasicNameValuePair("longitud", user.getText().toString()));
-            p.add(new BasicNameValuePair("cuartos", cuartos.getText().toString()));
-            p.add(new BasicNameValuePair("pisos", pisos.getText().toString()));
-            p.add(new BasicNameValuePair("descripcion", descripcion.getText().toString()));
-            p.add(new BasicNameValuePair("costo", costo.getText().toString()));
-            //p.add(new BasicNameValuePair("fotoportada", user.getText().toString()));
-            p.add(new BasicNameValuePair("terreno", terreno.toString().toString()));
-            p.add(new BasicNameValuePair("construccion", construccion.getText().toString()));
-            p.add(new BasicNameValuePair("direccion", ubicacion.getText().toString()));
-            p.add(new BasicNameValuePair("ventaoalquiler", spinner_tipo.getSelectedItem().toString()));
-            p.add(new BasicNameValuePair("ciudad", spinner_ciudad.getSelectedItem().toString()));
-            p.add(new BasicNameValuePair("banos", banos.getText().toString()));
-
-            JSONObject json = jsonParser.makeHttpRequest(url_publicar,"POST", p);
-            try {
-                int success = json.getInt(TAG_SUCCESS);
-                if (success == 1) {
-                    Intent i = new Intent(getApplicationContext(), usuario.class);
-                    i.putExtra("TAG_USUARIO", getIntent().getExtras().getString("TAG_USUARIO"));
-                    startActivity(i);
-                    overridePendingTransition(R.animator.shrinka, R.animator.shrinkb);
-                    finish();
-                } else {
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
+    public String getRealPathFromURI(Uri contentUri) {
+        String [] proj = {MediaStore.Images.Media.DATA};
+        Cursor cursor = managedQuery( contentUri, proj, null, null,null);
+        if (cursor == null) return null;
+        int column_index    = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        return cursor.getString(column_index);
     }
-
-    public void uploadPhoto(final File f) {
-        new Thread(new Runnable() {
-            public void run() {
-                //uploadFile(f);
-            }
-        }).start();
-    }
-
-    /*public int uploadFile(File sourceFile) {
-        String fileName = sourceFile.getName();
-        String extension = getFileExtension(fileName);
-
-        HttpURLConnection conn = null;
-        DataOutputStream dos = null;
-        String lineEnd = "\r\n";
-        String twoHyphens = "--";
-        String boundary = "*****";
-        int bytesRead, bytesAvailable, bufferSize;
-        byte[] buffer;
-        int maxBufferSize = 1 * 1024 * 1024;
-
-
-        if (!sourceFile.isFile()) {
-            runOnUiThread(new Runnable() {
-                public void run() {}
-            });
-            return 0;
-        }
-        else {
-            try {
-
-                DefaultHttpClient httpClient = new DefaultHttpClient();
-                HttpPost httpPost = new HttpPost(url_upload);
-                httpPost.setEntity(new UrlEncodedFormEntity(params));
-                HttpResponse httpResponse = httpClient.execute(httpPost);
-                HttpEntity httpEntity = httpResponse.getEntity();
-                is = httpEntity.getContent();
-
-
-                FileInputStream fileInputStream = new FileInputStream(sourceFile);
-
-
-                MultipartEntity mpEntity = new MultipartEntity();
-                ContentBody cbFile = new FileBody(file, "image/"+extension);
-                mpEntity.addPart("userfile", cbFile);
-
-
-                httppost.setEntity(mpEntity);
-                System.out.println("executing request " + httppost.getRequestLine());
-                HttpResponse response = httpclient.execute(httppost);
-                HttpEntity resEntity = response.getEntity();
-
-
-
-                conn.setRequestProperty("ENCTYPE", "multipart/form-data");
-                conn.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
-                conn.setRequestProperty("uploaded_file", fileName);
-                dos = new DataOutputStream(conn.getOutputStream());
-                dos.writeBytes(twoHyphens + boundary + lineEnd);
-                dos.writeBytes("Content-Disposition: form-data; name=\"uploaded_file\";filename=\""+ fileName + "\"" + lineEnd);
-                dos.writeBytes(lineEnd);
-                // create a buffer of  maximum size
-                bytesAvailable = fileInputStream.available();
-                bufferSize = Math.min(bytesAvailable, maxBufferSize);
-                buffer = new byte[bufferSize];
-                // read file and write it into form...
-                bytesRead = fileInputStream.read(buffer, 0, bufferSize);
-                while (bytesRead > 0) {
-                    dos.write(buffer, 0, bufferSize);
-                    bytesAvailable = fileInputStream.available();
-                    bufferSize = Math.min(bytesAvailable, maxBufferSize);
-                    bytesRead = fileInputStream.read(buffer, 0, bufferSize);
-                }
-                // send multipart form data necesssary after file data...
-                dos.writeBytes(lineEnd);
-                dos.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
-                // Responses from the server (code and message)
-                serverResponseCode = conn.getResponseCode();
-                String serverResponseMessage = conn.getResponseMessage();
-                Log.i("uploadFile", "HTTP Response is : " + serverResponseMessage + ": " + serverResponseCode);
-                //close the streams //
-                fileInputStream.close();
-                dos.flush();
-                dos.close();
-            } catch (MalformedURLException ex) {
-                ex.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return serverResponseCode;
-        }
-    }*/
-
-    public String getFileExtension(String name) {
-        String extension = "";
-        int index = name.lastIndexOf('.');
-        for(int i=index+1; i<name.length(); i++){
-            extension+=name.charAt(i);
-        }
-        return extension;
-    }
-
 }

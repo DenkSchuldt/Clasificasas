@@ -10,124 +10,113 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:background="@color/background">
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:orientation="vertical" >
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+        <ImageView
+            android:id="@+id/editar_imageView1"
+            android:layout_width="60dip"
+            android:layout_height="60dip"
+            android:src="@drawable/ic_action_user" />
+        <EditText
+            android:id="@+id/editar_nombres"
+            android:layout_width="270dip"
+            android:layout_height="60dip"
+            android:hint="@string/registrar_nombres"
+            android:layout_marginLeft="60dip"
+            android:inputType="text"
+            android:textColor="@color/text"
+            android:layout_marginTop="-60dip"
+            android:textSize="@dimen/text"/>
 
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Editar Informacion:"
-                android:layout_marginTop="30dip"
-                android:textSize="23sp"
-                android:textColor="@color/text"/>
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray"/>
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dip"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Nombres: "
-                    android:textSize="20sp"
-                    android:textColor="#fff"/>
-                <EditText
-                    android:id="@+id/usuario_editar_nombres"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Denny K. Schuldt"
-                    android:textSize="20sp"
-                    android:textColor="#fff"/>
-            </LinearLayout>
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Apellidos: "
-                    android:textSize="20sp"
-                    android:textColor="#fff"/>
-                <EditText
-                    android:id="@+id/usuario_editar_apellidos"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="DenkSchuldt"
-                    android:textSize="20sp"
-                    android:textColor="#fff"/>
-            </LinearLayout>
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Móvil: "
-                    android:textSize="20sp"
-                    android:textColor="#fff"/>
-                <EditText
-                    android:id="@+id/usuario_editar_movil"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="0990291056"
-                    android:textSize="20sp"
-                    android:textColor="#fff"
-                    android:layout_marginLeft="35dip"/>
-            </LinearLayout>
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Correo: "
-                    android:textSize="20sp"
-                    android:textColor="#fff"/>
-                <EditText
-                    android:id="@+id/usuario_editar_correo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="dschuldt@outlook.com"
-                    android:textSize="20sp"
-                    android:textColor="#fff"/>
-            </LinearLayout>
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Contraseña: "
-                    android:textSize="20sp"
-                    android:textColor="#fff"/>
-                <EditText
-                    android:id="@+id/usuario_editar_contrasena"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="***********"
-                    android:textSize="20sp"
-                    android:textColor="#fff"/>
-            </LinearLayout>
-            <Button android:id="@+id/usuario_editar_informacion"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="150dip"
-                android:text="@string/usuario_publicar"
-                android:background="@color/button"
-                android:textColor="@color/btext"/>
-        </LinearLayout>
-    </ScrollView>
+        <ImageView
+            android:id="@+id/editar_imageView2"
+            android:layout_width="60dip"
+            android:layout_height="60dip"
+            android:src="@drawable/ic_action_user" />
+        <EditText
+            android:id="@+id/editar_apellidos"
+            android:layout_width="270dip"
+            android:layout_height="60dip"
+            android:hint="@string/registrar_apellidos"
+            android:layout_marginTop="-60dip"
+            android:layout_marginLeft="60dip"
+            android:inputType="text"
+            android:textColor="@color/text"
+            android:textSize="@dimen/text"/>
+
+        <ImageView
+            android:id="@+id/editar_imageView3"
+            android:layout_width="60dip"
+            android:layout_height="60dip"
+            android:src="@drawable/ic_action_call" />
+        <EditText
+            android:id="@+id/editar_movil"
+            android:layout_width="270dip"
+            android:layout_height="60dip"
+            android:hint="@string/registrar_movil"
+            android:layout_marginTop="-60dip"
+            android:layout_marginLeft="60dip"
+            android:textColor="@color/text"
+            android:inputType="numberDecimal"
+            android:textSize="@dimen/text"/>
+
+        <ImageView
+            android:id="@+id/editar_imageView4"
+            android:layout_width="60dip"
+            android:layout_height="60dip"
+            android:src="@drawable/ic_action_mail" />
+        <EditText
+            android:id="@+id/editar_correo"
+            android:layout_width="270dip"
+            android:layout_height="60dip"
+            android:hint="@string/registrar_correo"
+            android:layout_marginTop="-60dip"
+            android:layout_marginLeft="60dip"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/text"
+            android:textSize="@dimen/text"/>
+
+        <ImageView
+            android:id="@+id/editar_imageView6"
+            android:layout_width="60dip"
+            android:layout_height="60dip"
+            android:src="@drawable/ic_action_password" />
+        <EditText
+            android:id="@+id/editar_contrasena"
+            android:layout_width="270dip"
+            android:layout_height="60dip"
+            android:hint="@string/registrar_contrasena"
+            android:layout_marginTop="-60dip"
+            android:layout_marginLeft="60dip"
+            android:inputType="textPassword"
+            android:textColor="@color/text"
+            android:textSize="@dimen/text"/>
+
+        <ImageView
+            android:id="@+id/editar_imageView7"
+            android:layout_width="60dip"
+            android:layout_height="60dip"
+            android:src="@drawable/ic_action_password" />
+        <EditText
+            android:id="@+id/editar_confirmar"
+            android:layout_width="270dip"
+            android:layout_height="60dip"
+            android:hint="@string/registrar_confirmar"
+            android:layout_marginTop="-60dip"
+            android:layout_marginLeft="60dip"
+            android:inputType="textPassword"
+            android:textColor="@color/text"
+            android:textSize="@dimen/text"/>
+
+        <Button android:id="@+id/editar_btn"
+            android:layout_width="fill_parent"
+            android:layout_height="49dp"
+            android:text="@string/registrar_button"
+            android:layout_marginTop="70dip"
+            android:background="@drawable/buttom"
+            android:textColor="@color/btext"
+            android:textSize="@dimen/text"/>
+    </LinearLayout>
 </RelativeLayout>

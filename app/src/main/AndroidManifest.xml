@@ -2,41 +2,44 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ihm.clasificasas.clasificasas" >
 
-    <!-- <uses-library android:name="com.google.android.maps"/> -->
-
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.SEND"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.CALL_PHONE"/>
-    <uses-permission android:name="android.permission.send"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
+    <uses-permission android:name="in.wptrafficanalyzer.locationgeocodingv2.permission.MAPS_RECEIVE"/>
 
     <permission
         android:name="in.wptrafficanalyzer.locationgeocodingv2.permission.MAPS_RECEIVE"
         android:protectionLevel="signature"/>
 
-    <uses-permission android:name="in.wptrafficanalyzer.locationgeocodingv2.permission.MAPS_RECEIVE"/>
-
-    <uses-feature
-        android:glEsVersion="0x00020000"
-        android:required="true" />
+    <uses-feature android:glEsVersion="0x00020000" android:required="true" />
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        <meta-data
-            android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyDErOkPjgzsF8Ke_f1v1DyMBvEGLq6KEaU" />
 
         <uses-library android:name="com.google.android.maps" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyDLhi1XxHsmqVfWnG_e2uVo2aj82AE_mIM" />
 
         <activity
             android:name=".main"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Holo.Light.DarkActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -56,6 +59,14 @@
             android:theme="@android:style/Theme.Holo.Light.DarkActionBar">
         </activity>
         <activity
+            android:name=".publicada"
+            android:label="Publicación"
+            android:theme="@android:style/Theme.Holo.Light.DarkActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ihm.clasificasas.clasificasas.usuario" />
+        </activity>
+        <activity
             android:name=".buscar"
             android:label="@string/buscar"
             android:theme="@android:style/Theme.Holo.Light.DarkActionBar" >
@@ -69,7 +80,15 @@
             android:theme="@android:style/Theme.Holo.Light.DarkActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.ihm.clasificasas.clasificasas.publciar" />
+                android:value="com.ihm.clasificasas.clasificasas.usuario" />
+        </activity>
+        <activity
+            android:name=".MapViewer"
+            android:label="Ubicación de la casa"
+            android:theme="@android:style/Theme.Holo.Light.DarkActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ihm.clasificasas.clasificasas.publicar" />
         </activity>
         <activity
             android:name=".resultados"
@@ -89,23 +108,11 @@
         </activity>
         <activity
             android:name=".editar"
-            android:label="Editar perfil"
+            android:label="Editar información personal"
             android:theme="@android:style/Theme.Holo.Light.DarkActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ihm.clasificasas.clasificasas.usuario" />
-        </activity>
-        <activity
-            android:name=".casausuario"
-            android:label="@string/detalle"
-            android:theme="@android:style/Theme.Holo.Light.DarkActionBar" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.ihm.clasificasas.clasificasas.usuario" />
-        </activity>
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/title_activity_main" >
         </activity>
     </application>
 

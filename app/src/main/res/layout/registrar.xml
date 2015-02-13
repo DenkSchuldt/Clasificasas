@@ -9,122 +9,129 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:background="@color/background">
 
-    <ImageView
-        android:id="@+id/registrar_imageView1"
-        android:layout_width="60dip"
-        android:layout_height="60dip"
-        android:src="@drawable/user" />
-    <EditText
-        android:id="@+id/registrar_nombres"
-        android:layout_width="270dip"
-        android:layout_height="60dip"
-        android:hint="@string/registrar_nombres"
-        android:layout_marginLeft="60dip"
-        android:inputType="text"
-        android:textColor="@color/text"/>
-
-    <ImageView
-        android:id="@+id/registrar_imageView2"
-        android:layout_width="60dip"
-        android:layout_height="60dip"
-        android:layout_marginTop="60dip"
-        android:src="@drawable/user" />
-    <EditText
-        android:id="@+id/registrar_apellidos"
-        android:layout_width="270dip"
-        android:layout_height="60dip"
-        android:hint="@string/registrar_apellidos"
-        android:layout_marginTop="60dip"
-        android:layout_marginLeft="60dip"
-        android:inputType="text"
-        android:textColor="@color/text"/>
-
-    <ImageView
-        android:id="@+id/registrar_imageView3"
-        android:layout_width="60dip"
-        android:layout_height="60dip"
-        android:layout_marginTop="120dip"
-        android:src="@drawable/telf" />
-    <EditText
-        android:id="@+id/registrar_movil"
-        android:layout_width="270dip"
-        android:layout_height="60dip"
-        android:hint="@string/registrar_movil"
-        android:layout_marginTop="120dip"
-        android:layout_marginLeft="60dip"
-        android:textColor="@color/text"
-        android:inputType="numberDecimal"/>
-
-    <ImageView
-        android:id="@+id/registrar_imageView4"
-        android:layout_width="60dip"
-        android:layout_height="60dip"
-        android:layout_marginTop="180dip"
-        android:src="@drawable/email" />
-    <EditText
-        android:id="@+id/registrar_correo"
-        android:layout_width="270dip"
-        android:layout_height="60dip"
-        android:hint="@string/registrar_correo"
-        android:layout_marginTop="180dip"
-        android:layout_marginLeft="60dip"
-        android:inputType="textEmailAddress"
-        android:textColor="@color/text"/>
-
-    <ImageView
-        android:id="@+id/registrar_imageView5"
-        android:layout_width="60dip"
-        android:layout_height="60dip"
-        android:layout_marginTop="240dip"
-        android:src="@drawable/user" />
-    <EditText
-        android:id="@+id/registrar_usuario"
-        android:layout_width="270dip"
-        android:layout_height="60dip"
-        android:hint="@string/registrar_usuario"
-        android:layout_marginTop="240dip"
-        android:layout_marginLeft="60dip"
-        android:inputType="text"
-        android:textColor="@color/text"/>
-
-    <ImageView
-        android:id="@+id/registrar_imageView6"
-        android:layout_width="60dip"
-        android:layout_height="60dip"
-        android:layout_marginTop="300dip"
-        android:src="@drawable/passwd" />
-    <EditText
-        android:id="@+id/registrar_contrasena"
-        android:layout_width="270dip"
-        android:layout_height="60dip"
-        android:hint="@string/registrar_contrasena"
-        android:layout_marginTop="300dip"
-        android:layout_marginLeft="60dip"
-        android:inputType="textPassword"
-        android:textColor="@color/text"/>
-
-    <ImageView
-        android:id="@+id/registrar_imageView7"
-        android:layout_width="60dip"
-        android:layout_height="60dip"
-        android:layout_marginTop="360dip"
-        android:src="@drawable/user" />
-    <EditText
-        android:id="@+id/registrar_confirmar"
-        android:layout_width="270dip"
-        android:layout_height="60dip"
-        android:hint="@string/registrar_confirmar"
-        android:layout_marginTop="360dip"
-        android:layout_marginLeft="60dip"
-        android:inputType="textPassword"
-        android:textColor="@color/text"/>
-
-    <Button android:id="@+id/registrar_btn"
+    <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/registrar"
-        android:layout_marginTop="440dip"
-        android:background="@color/button"
-        android:textColor="@color/btext"/>
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+        <ImageView
+            android:id="@+id/registrar_imageView1"
+            android:layout_width="60dip"
+            android:layout_height="60dip"
+            android:src="@drawable/ic_action_user" />
+        <EditText
+            android:id="@+id/registrar_nombres"
+            android:layout_width="270dip"
+            android:layout_height="60dip"
+            android:hint="@string/registrar_nombres"
+            android:layout_marginLeft="60dip"
+            android:inputType="text"
+            android:textColor="@color/text"
+            android:layout_marginTop="-60dip"
+            android:textSize="@dimen/text"/>
 
+        <ImageView
+            android:id="@+id/registrar_imageView2"
+            android:layout_width="60dip"
+            android:layout_height="60dip"
+            android:src="@drawable/ic_action_user" />
+        <EditText
+            android:id="@+id/registrar_apellidos"
+            android:layout_width="270dip"
+            android:layout_height="60dip"
+            android:hint="@string/registrar_apellidos"
+            android:layout_marginTop="-60dip"
+            android:layout_marginLeft="60dip"
+            android:inputType="text"
+            android:textColor="@color/text"
+            android:textSize="@dimen/text"/>
+
+        <ImageView
+            android:id="@+id/registrar_imageView3"
+            android:layout_width="60dip"
+            android:layout_height="60dip"
+            android:src="@drawable/ic_action_call" />
+        <EditText
+            android:id="@+id/registrar_movil"
+            android:layout_width="270dip"
+            android:layout_height="60dip"
+            android:hint="@string/registrar_movil"
+            android:layout_marginTop="-60dip"
+            android:layout_marginLeft="60dip"
+            android:textColor="@color/text"
+            android:inputType="numberDecimal"
+            android:textSize="@dimen/text"/>
+
+        <ImageView
+            android:id="@+id/registrar_imageView4"
+            android:layout_width="60dip"
+            android:layout_height="60dip"
+            android:src="@drawable/ic_action_mail" />
+        <EditText
+            android:id="@+id/registrar_correo"
+            android:layout_width="270dip"
+            android:layout_height="60dip"
+            android:hint="@string/registrar_correo"
+            android:layout_marginTop="-60dip"
+            android:layout_marginLeft="60dip"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/text"
+            android:textSize="@dimen/text"/>
+
+        <ImageView
+            android:id="@+id/registrar_imageView5"
+            android:layout_width="60dip"
+            android:layout_height="60dip"
+            android:src="@drawable/ic_action_user_add" />
+        <EditText
+            android:id="@+id/registrar_usuario"
+            android:layout_width="270dip"
+            android:layout_height="60dip"
+            android:hint="@string/registrar_usuario"
+            android:layout_marginTop="-60dip"
+            android:layout_marginLeft="60dip"
+            android:inputType="text"
+            android:textColor="@color/text"
+            android:textSize="@dimen/text"/>
+
+        <ImageView
+            android:id="@+id/registrar_imageView6"
+            android:layout_width="60dip"
+            android:layout_height="60dip"
+            android:src="@drawable/ic_action_password" />
+        <EditText
+            android:id="@+id/registrar_contrasena"
+            android:layout_width="270dip"
+            android:layout_height="60dip"
+            android:hint="@string/registrar_contrasena"
+            android:layout_marginTop="-60dip"
+            android:layout_marginLeft="60dip"
+            android:inputType="textPassword"
+            android:textColor="@color/text"
+            android:textSize="@dimen/text"/>
+
+        <ImageView
+            android:id="@+id/registrar_imageView7"
+            android:layout_width="60dip"
+            android:layout_height="60dip"
+            android:src="@drawable/ic_action_password" />
+        <EditText
+            android:id="@+id/registrar_confirmar"
+            android:layout_width="270dip"
+            android:layout_height="60dip"
+            android:hint="@string/registrar_confirmar"
+            android:layout_marginTop="-60dip"
+            android:layout_marginLeft="60dip"
+            android:inputType="textPassword"
+            android:textColor="@color/text"
+            android:textSize="@dimen/text"/>
+
+        <Button android:id="@+id/registrar_btn"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/registrar_button"
+            android:layout_marginTop="10dip"
+            android:background="@drawable/buttom"
+            android:textColor="@color/btext"
+            android:textSize="@dimen/text"/>
+    </LinearLayout>
 </RelativeLayout>

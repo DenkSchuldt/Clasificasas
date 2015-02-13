@@ -13,6 +13,7 @@
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
+
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -20,110 +21,25 @@
 
             <Button android:id="@+id/usuario_buscar"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="49dp"
+                android:background="@drawable/buttom"
                 android:text="@string/home_buscar"
-                android:background="@color/button"
+                android:textSize="@dimen/text"
                 android:textColor="@color/btext"/>
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Informacion del usuario:"
-                android:layout_marginTop="30dip"
-                android:textSize="23sp"
-                android:textColor="@color/text"/>
-            <ImageView
-                android:id="@+id/usuario_editar"
-                android:layout_width="50dip"
-                android:layout_height="50dip"
-                android:layout_gravity="end"
-                android:layout_marginTop="-40dip"
-                android:src="@drawable/edit"/>
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray"/>
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dip"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Nombre: "
-                    android:textSize="20sp"
-                    android:textColor="#fff"/>
-                <TextView
-                    android:id="@+id/usuario_nombre"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:textColor="#fff"/>
-            </LinearLayout>
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Usuario: "
-                    android:textSize="20sp"
-                    android:textColor="#fff"/>
-                <TextView
-                    android:id="@+id/usuario_usuario"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:textColor="#fff"/>
-            </LinearLayout>
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Móvil: "
-                    android:textSize="20sp"
-                    android:textColor="#fff"/>
-                <TextView
-                    android:id="@+id/usuario_movil"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:textColor="#fff"/>
-            </LinearLayout>
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Correo: "
-                    android:textSize="20sp"
-                    android:textColor="#fff"/>
-                <TextView
-                    android:id="@+id/usuario_correo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:textColor="#fff"/>
-            </LinearLayout>
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
                 android:text="Casas publicadas:"
                 android:layout_marginTop="30dip"
-                android:textSize="23sp"
-                android:textColor="#fff"/>
+                android:textSize="@dimen/text"
+                android:textColor="@color/text"/>
+
             <LinearLayout
-                android:id="@+id/usuario_publicaciones"
+                android:id="@+id/usuario_publicadas_layout"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical" >
             </LinearLayout>
 
             <TextView
@@ -132,22 +48,24 @@
                 android:layout_height="wrap_content"
                 android:text="Casas favoritas:"
                 android:layout_marginTop="30dip"
-                android:textSize="23sp"
-                android:textColor="#fff"/>
+                android:textSize="@dimen/text"
+                android:textColor="@color/text"/>
+
             <LinearLayout
-                android:id="@+id/usuario_favoritas"
+                android:id="@+id/usuario_favoritas_layout"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical" >
             </LinearLayout>
 
             <Button android:id="@+id/usuario_publicar"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="49dp"
+                android:background="@drawable/buttom"
                 android:layout_marginTop="30dip"
                 android:text="@string/usuario_publicar"
-                android:background="@color/button"
-                android:textColor="@color/btext"/>
+                android:textColor="@color/btext"
+                android:textSize="@dimen/text"/>
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

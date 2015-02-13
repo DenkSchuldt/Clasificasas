@@ -1,8 +1,8 @@
 <resources>
-    <color name="background">#1A1A17</color>
+    <color name="background">#DADBDB</color>
     <color name="blue">#00abea</color>
     <color name="white">#ffffff</color>
     <color name="button">#EA5E00</color>
     <color name="btext">#fff</color>
-    <color name="text">#fff</color>
+    <color name="text">#494B4F</color>
 </resources>

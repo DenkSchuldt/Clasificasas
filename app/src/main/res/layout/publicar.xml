@@ -13,126 +13,224 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:orientation="vertical" >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text"
+                android:textColor="@color/text"
+                android:text="Costo: "/>
             <EditText
                 android:id="@+id/publicar_costo"
-                android:layout_width="160dip"
-                android:layout_height="45dip"
-                android:hint="@string/publicar_costo"
-                android:textSize="22dp"
-                android:inputType="number" />
-            <TextView
-                android:id="@+id/publicar_tipo_tv"
-                android:layout_width="160dip"
+                android:layout_width="100dip"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_marginTop="-33dip"
-                android:textSize="22dp"/>
+                android:hint="@string/publicar_costo"
+                android:layout_marginLeft="52dp"
+                android:layout_marginTop="-29dp"
+                android:textSize="@dimen/text"
+                android:inputType="number" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text"
+                android:textColor="@color/text"
+                android:text="Tipo: "
+                android:layout_marginLeft="177dp"
+                android:layout_marginTop="-30dp"/>
             <Spinner
                 android:id="@+id/publicar_tipo"
-                android:layout_width="160dip"
+                android:layout_width="110dip"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:layout_marginTop="-33dip"
-                android:textSize="22dp"
-                android:prompt="@string/publicar_tipo"/>
-            <ImageButton
+                android:textSize="@dimen/text"
+                android:prompt="@string/publicar_tipo"
+                android:layout_marginTop="-30dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text"
+                android:textColor="@color/text"
+                android:text="Fotografía de la casa: "
+                android:layout_marginTop="10dp"/>
+            <ImageView
                 android:id="@+id/publicar_portada"
                 android:layout_width="fill_parent"
                 android:layout_height="150dip"
                 android:layout_gravity="center"
                 android:src="@drawable/houseblank"
-                android:scaleType="fitXY"/>
+                android:scaleType="fitXY"
+                android:layout_marginTop="10dp"/>
+
             <TextView
-                android:id="@+id/publicar_ciudad_tv"
-                android:layout_width="fill_parent"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="-10dip"
-                android:textSize="22dp"/>
+                android:textSize="@dimen/text"
+                android:textColor="@color/text"
+                android:text="Ciudad: "
+                android:gravity="end"
+                android:layout_marginTop="20dp"/>
             <Spinner
                 android:id="@+id/publicar_ciudad"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="-10dip"
-                android:textSize="22dp"
+                android:layout_marginTop="-30dip"
+                android:layout_marginLeft="110dp"
+                android:textSize="@dimen/text"
                 android:prompt="@string/publicar_tipo"/>
+
+            <TextView
+                android:layout_width="110dip"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text"
+                android:textColor="@color/text"
+                android:text="Ubicación: "
+                android:gravity="end"
+                android:layout_marginTop="20dp"/>
 
             <EditText
                 android:id="@+id/publicar_ubicacion"
-                android:layout_width="205dp"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:hint="Escribir ubicacion"
+                android:hint="Selecciona el mapa"
                 android:layout_toEndOf="@+id/textView4"
-                android:textSize="22dp"/>
-
-            <Button
-                android:id="@+id/home_buscar"
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="84dp"
-                android:layout_height="36dp"
-                android:text="Buscar"
-                android:layout_marginTop="-35dip"
-                android:layout_gravity="right" />
+                android:layout_marginLeft="110dp"
+                android:layout_marginTop="-30dp"
+                android:textSize="@dimen/text"/>
 
             <fragment xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/map"
                 android:clickable="true"
                 android:layout_marginTop="10dp"
-                android:layout_height="216dp"
+                android:layout_height="150dp"
                 android:layout_width="match_parent"
-                android:name="com.google.android.gms.maps.SupportMapFragment"
-                />
+                android:name="com.google.android.gms.maps.SupportMapFragment"/>
+
+            <TextView
+                android:layout_width="110dip"
+                android:layout_height="wrap_content"
+                android:text="Cuartos: "
+                android:textSize="@dimen/text"
+                android:layout_marginTop="20dip"
+                android:gravity="end"/>
             <EditText
                 android:id="@+id/publicar_cuartos"
-                android:layout_width="160dip"
+                android:layout_width="60dip"
                 android:layout_height="45dip"
                 android:hint="@string/publicar_cuartos"
-                android:textSize="22dp"
-                android:inputType="number" />
+                android:textSize="@dimen/text"
+                android:inputType="number"
+                android:layout_marginLeft="110dip"
+                android:layout_marginTop="-33dip"/>
+
+            <TextView
+                android:layout_width="60dip"
+                android:layout_height="wrap_content"
+                android:text="Baños: "
+                android:textSize="@dimen/text"
+                android:layout_marginLeft="190dip"
+                android:layout_marginTop="-34dip"/>
             <EditText
                 android:id="@+id/publicar_banos"
-                android:layout_width="160dip"
+                android:layout_width="60dip"
                 android:layout_height="45dip"
                 android:hint="@string/publicar_banos"
-                android:textSize="22dp"
-                android:layout_marginTop="-45dip"
-                android:layout_marginLeft="180dip"/>
+                android:textSize="@dimen/text"
+                android:inputType="number"
+                android:layout_marginTop="-33dip"
+                android:layout_marginLeft="250dip"/>
+
+            <TextView
+                android:layout_width="110dip"
+                android:layout_height="wrap_content"
+                android:text="Pisos: "
+                android:textSize="@dimen/text"
+                android:layout_marginTop="20dip"
+                android:gravity="end"/>
             <EditText
                 android:id="@+id/publicar_pisos"
-                android:layout_width="160dip"
+                android:layout_width="60dip"
                 android:layout_height="45dip"
                 android:hint="@string/publicar_pisos"
-                android:textSize="22dp"
-                android:inputType="number" />
+                android:textSize="@dimen/text"
+                android:inputType="number"
+                android:layout_marginLeft="110dip"
+                android:layout_marginTop="-33dip"/>
+
+            <TextView
+                android:layout_width="110dip"
+                android:layout_height="wrap_content"
+                android:text="Terreno: "
+                android:textSize="@dimen/text"
+                android:layout_marginTop="20dip"
+                android:gravity="end"/>
             <EditText
                 android:id="@+id/publicar_terreno"
-                android:layout_width="160dip"
+                android:layout_width="60dip"
                 android:layout_height="45dip"
                 android:hint="@string/publicar_terreno"
-                android:textSize="22dp"
-                android:layout_marginTop="-45dip"
-                android:layout_marginLeft="180dip"
+                android:textSize="@dimen/text"
+                android:layout_marginTop="-33dip"
+                android:layout_marginLeft="110dip"
                 android:inputType="number"/>
+            <TextView
+                android:layout_width="30dip"
+                android:layout_height="wrap_content"
+                android:text="m²"
+                android:textSize="@dimen/text"
+                android:layout_marginTop="-35dip"
+                android:layout_marginLeft="170dip"/>
+
+            <TextView
+                android:layout_width="110dip"
+                android:layout_height="wrap_content"
+                android:text="Construcción: "
+                android:textSize="@dimen/text"
+                android:layout_marginTop="30dip"
+                android:gravity="end"/>
             <EditText
                 android:id="@+id/publicar_construccion"
-                android:layout_width="160dip"
+                android:layout_width="60dip"
                 android:layout_height="45dip"
                 android:hint="@string/publicar_construccion"
-                android:textSize="22dp"
-                android:inputType="number" />
+                android:textSize="@dimen/text"
+                android:inputType="number"
+                android:layout_marginLeft="110dip"
+                android:layout_marginTop="-33dip"/>
+            <TextView
+                android:layout_width="30dip"
+                android:layout_height="wrap_content"
+                android:text="m²"
+                android:textSize="@dimen/text"
+                android:layout_marginTop="-35dip"
+                android:layout_marginLeft="170dip"/>
+
+            <TextView
+                android:layout_width="110dip"
+                android:layout_height="wrap_content"
+                android:text="Descripción: "
+                android:textSize="@dimen/text"
+                android:layout_marginTop="30dip"
+                android:gravity="end"/>
             <EditText
                 android:id="@+id/publicar_descripcion"
                 android:layout_width="fill_parent"
                 android:layout_height="150dip"
                 android:hint="@string/publicar_descripcion"
-                android:textSize="20dp"
+                android:textSize="@dimen/text"
                 android:gravity="top"
                 android:layout_marginTop="10dip"/>
-            <Button android:id="@+id/publicar"
+            <Button android:id="@+id/publicar_button"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="49dp"
                 android:text="@string/publicar"
-                android:layout_marginTop="5dip"/>
+                android:layout_marginTop="5dip"
+                android:textSize="@dimen/text"
+                android:textColor="@color/btext"
+                android:background="@drawable/buttom"/>
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

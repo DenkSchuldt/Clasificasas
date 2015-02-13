@@ -8,21 +8,34 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Looper;
+import android.renderscript.Element;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 
 public class main extends Activity {
@@ -31,10 +44,7 @@ public class main extends Activity {
     Button ingresar;
     Button registrar;
     TextView user, password;
-    JSONParser jsonParser = new JSONParser();
-    String url_login = "http://"+IP.address+"/clasificasas/login.php";
-    String TAG_SUCCESS = "success";
-    String TAG_USUARIO = "usuario";
+    ArrayList<String> mImageLink;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +73,18 @@ public class main extends Activity {
                     overridePendingTransition(R.animator.pushleftin, R.animator.pushleftout);
                     break;
                 case R.id.home_ingresar:
-                    new LoginUsuario().execute();
+                    if(verificarUsuario()){
+                        Intent us = new Intent(main.this, usuario.class);
+                        us.putExtra("TAG_USUARIO",user.getText().toString());
+                        startActivity(us);
+                        overridePendingTransition(R.animator.shrinka, R.animator.shrinkb);
+                        finish();
+                    }else{
+                        Context context = getApplicationContext();
+                        CharSequence text = "Usuario o Contraseña inválida";
+                        Toast toast = Toast.makeText(context,text, Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
                     break;
                 case R.id.home_registrar:
                     Intent registrar = new Intent(main.this, registrar.class);
@@ -73,6 +94,27 @@ public class main extends Activity {
             }
         }
     };
+
+    public boolean verificarUsuario(){
+        try {
+            File file = new File(Environment.getExternalStorageDirectory() + "/CLASIFICASAS/usuarios.xml");
+            InputStream is = new FileInputStream(file.getPath());
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            Document doc = db.parse(new InputSource(is));
+            doc.getDocumentElement().normalize();
+            NodeList usernames = doc.getElementsByTagName("username");
+            NodeList passwords = doc.getElementsByTagName("password");
+            for (int i = 0; i < usernames.getLength(); i++) {
+                String usuario = usernames.item(i).getFirstChild().getNodeValue();
+                String clave   = passwords.item(i).getFirstChild().getNodeValue();
+                if(user.getText().toString().equals(usuario) && password.getText().toString().equals(clave))
+                    return true;
+            }
+
+        }catch (Exception e){}
+        return false;
+    }
 
     public Dialog createDialog(String title,String s) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
@@ -91,52 +133,5 @@ public class main extends Activity {
             }
         });
         alertDialog.show();
-    }
-
-    /**
-     * Background Async Task to Create new product
-     * */
-    class LoginUsuario extends AsyncTask<String, String, String> {
-        @Override
-        protected String doInBackground(String... params) {
-            List<NameValuePair> p = new ArrayList<NameValuePair>();
-            p.add(new BasicNameValuePair("usuario", user.getText().toString()));
-            MessageDigest md = null;
-            try {
-                md = MessageDigest.getInstance("MD5");
-                md.update(password.getText().toString().getBytes());
-                byte byteData[] = md.digest();
-                StringBuffer sb = new StringBuffer();
-                for (int i = 0; i < byteData.length; i++) {
-                    sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
-                }
-                p.add(new BasicNameValuePair("cont",sb.toString()));
-            } catch (NoSuchAlgorithmException e) {
-                e.printStackTrace();
-            }
-            JSONObject json = jsonParser.makeHttpRequest(url_login,"POST", p);
-            try {
-                int success = json.getInt(TAG_SUCCESS);
-                if (success == 1) {
-                    Intent i = new Intent(getApplicationContext(), usuario.class);
-                    i.putExtra("TAG_USUARIO", json.getString(TAG_USUARIO));
-                    startActivity(i);
-                    overridePendingTransition(R.animator.shrinka, R.animator.shrinkb);
-                    finish();
-                } else {
-                    runOnUiThread(new Runnable(){
-                        public void run(){
-                            showAlertDialog("Error de autenticacion",
-                                  "La contraseña es incorrecta o usted ha escrito un usuario invalido");
-                        }
-                    });
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
     }
 }

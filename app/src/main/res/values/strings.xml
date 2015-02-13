@@ -6,7 +6,7 @@
     <string name="home_contrasena">Contraseña</string>
     <string name="home_buscar">Buscar Casa</string>
     <string name="home_ingresar">Ingresar</string>
-    <string name="home_registrarme">Registrarme</string>
+    <string name="home_registrarme"><u>Regístrate en Clasificasas</u></string>
 
     <string name="registrar_nombres">Nombres</string>
     <string name="registrar_apellidos">Apellidos</string>
@@ -15,7 +15,8 @@
     <string name="registrar_usuario">Usuario</string>
     <string name="registrar_contrasena">Contraseña</string>
     <string name="registrar_confirmar">Confirmar contraseña</string>
-    <string name="registrar">Registrar</string>
+    <string name="registrar">Registro</string>
+    <string name="registrar_button">Confirmar</string>
 
     <string name="usuario_publicar">Publicar Casa</string>
     <string name="usuario_buscar">Buscar Casa</string>
@@ -29,21 +30,21 @@
     <string name="buscar_cuartos">Cuartos: </string>
     <string name="buscar_banos">Baños:</string>
     <string name="buscar_pisos">Pisos:</string>
-    <string name="buscar_min">$0</string>
-    <string name="buscar_max">$100.000</string>
+    <string name="buscar_min"></string>
+    <string name="buscar_max"></string>
     <string name="buscar_presupuesto">50000</string>
 
     <string name="publicar_ubicacion">Ubicación: Samanes 3</string>
     <string name="publicar_info">Información:</string>
     <string name="publicar_foto">Agregar fotografías adicionales</string>
-    <string name="publicar_costo">Costo: 1000</string>
-    <string name="publicar_cuartos">N° Cuartos</string>
-    <string name="publicar_banos">N° Baños</string>
-    <string name="publicar_pisos">N° Pisos</string>
-    <string name="publicar_terreno">Terr: 100m 2</string>
-    <string name="publicar_construccion">Const: 90 m2</string>
+    <string name="publicar_costo">$1000</string>
+    <string name="publicar_cuartos">4</string>
+    <string name="publicar_banos">3</string>
+    <string name="publicar_pisos">2</string>
+    <string name="publicar_terreno">100</string>
+    <string name="publicar_construccion">90</string>
     <string name="publicar_tipo">Alquiler</string>
-    <string name="publicar_descripcion">Breve descripcion de la casa</string>
+    <string name="publicar_descripcion">Breve descripción de la casa</string>
     <string name="publicar">Publicar Casa</string>
 
     <string name="resultados">Resultados</string>

@@ -2,11 +2,6 @@ apply plugin: 'com.android.application'
 
 android {
     signingConfigs {
-        myandroidkey {
-            keyAlias 'app'
-            keyPassword 'changeit'
-            storePassword 'changeit'
-        }
     }
     compileSdkVersion 19
     buildToolsVersion '20.0.0'
@@ -28,8 +23,8 @@ android {
 }
 
 dependencies {
-    compile 'com.google.android.gms:play-services:3.1.36'
+    compile 'com.google.android.gms:play-services:5.0.89'
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile files ('libs/httpmime-4.0-sources.jar')
-    compile files ('httpmime-4.0-sources.jar')
+    compile files('libs/httpmime-4.0-sources.jar')
+    compile files('httpmime-4.0-sources.jar')
 }
